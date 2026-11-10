@@ -9,3 +9,10 @@ if(privacyNotice){
  document.querySelectorAll('[data-open-privacy]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();privacyNotice.hidden=false;document.getElementById('privacy-title').focus({preventScroll:true});}));
  closePrivacy.addEventListener('click',()=>{privacyNotice.hidden=true;try{sessionStorage.setItem(privacyKey,'dismissed');}catch{}const link=document.querySelector('[data-open-privacy]');if(link)link.focus({preventScroll:true});});
 }
+
+const contactDialog=document.getElementById('contact-dialog');
+if(contactDialog&&typeof contactDialog.showModal==='function'){
+ document.querySelectorAll('[data-open-contact]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();contactDialog.showModal();}));
+ contactDialog.querySelector('[data-close-contact]').addEventListener('click',()=>contactDialog.close());
+ contactDialog.addEventListener('click',event=>{if(event.target===contactDialog){const box=contactDialog.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)contactDialog.close();}});
+}

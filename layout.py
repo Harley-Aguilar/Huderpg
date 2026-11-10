@@ -11,7 +11,7 @@ from demo import sheet
 ROOT=Path(__file__).parent
 BASE='https://harley-aguilar.github.io/Huderpg/'
 IG='https://www.instagram.com/_huderpg_/'
-VERSION='large-text-1'
+VERSION='contact-dialog-1'
 
 def arrow(direction='up'):
     path='M5 19 19 5M5 5h14v14' if direction=='up' else 'M5 12h14m-6-6 6 6-6 6'
@@ -22,6 +22,7 @@ def die(cls=''):
 
 def social_icon(name):
     icons = {
+        'Email': '<rect x="2" y="4" width="20" height="16" rx="3"/><path d="m3 6 9 7 9-7"/>',
         'YouTube': '<rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3Z" fill="currentColor" stroke="none"/>',
         'Instagram': '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>',
         'TikTok': '<path d="M14 3h3c.3 2.4 1.7 4 4 4.5v3a9.7 9.7 0 0 1-4-1.6V16a6 6 0 1 1-7-5.9v3.1a3 3 0 1 0 4 2.8Z"/>'
@@ -41,7 +42,7 @@ def languages(key,case=False):
 
 def header(key,case=False):
     d=D[key];c=COPY[key];home='../index.html' if case else 'index.html'
-    return f'''<header class="site-header" id="top"><div class="nav wrap">{logo(home)}{languages(key,case)}<a class="nav-contact" href="{IG}" target="_blank" rel="noopener noreferrer">{c['start']}{arrow()}</a></div></header>'''
+    return f'''<header class="site-header" id="top"><div class="nav wrap">{logo(home)}{languages(key,case)}<a class="nav-contact" href="mailto:huderpg@gmail.com" data-open-contact aria-haspopup="dialog" aria-controls="contact-dialog">{c['start']}{arrow()}</a></div></header>'''
 
 def head(key,prefix='',case=False):
     d=D[key]
@@ -73,7 +74,7 @@ def project_art(key,prefix=''):
 
 def footer(key,home='index.html'):
     d=D[key];c=COPY[key]
-    return f'<div class="footer-bottom wrap"><span class="mono">© 2026 HUDE · {d["country"]}</span><span>{c["footer"]}</span><a class="privacy-link" href="#privacy-notice" data-open-privacy>{"Privacidade" if key=="pt" else "Privacy"}</a><a href="#top">{c["backTop"]}{arrow()}</a></div></footer>'+privacy_notice(key)+'</body></html>'
+    return f'<div class="footer-bottom wrap"><span class="mono">© 2026 HUDE · {d["country"]}</span><span>{c["footer"]}</span><a class="privacy-link" href="#privacy-notice" data-open-privacy>{"Privacidade" if key=="pt" else "Privacy"}</a><a href="#top">{c["backTop"]}{arrow()}</a></div></footer>'+privacy_notice(key)+contact_dialog(key)+'</body></html>'
 
 def privacy_notice(key):
     pt=key=='pt'
@@ -83,14 +84,21 @@ def privacy_notice(key):
     text='A hospedagem no GitHub Pages registra endereços IP para segurança. Os dados digitados na demonstração ficam apenas na página e são apagados ao recarregar. Ao fechar este aviso, uma preferência é salva somente nesta sessão da aba, sem identificador de visitante. Links para redes sociais abrem serviços com políticas próprias. Evite inserir dados pessoais na demonstração.' if pt else 'GitHub Pages logs IP addresses for security. Data entered in the demonstration stays in the page and resets on reload. Dismissing this notice stores only a preference for this tab session, without a visitor identifier. Social links open services with their own policies. Avoid entering personal data in the demonstration.'
     return f'''<section class="privacy-notice" id="privacy-notice" role="region" aria-labelledby="privacy-title"><h2 id="privacy-title" tabindex="-1">{title}</h2><p>{summary}</p><details><summary>{details}</summary><p>{text}</p><a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">{'Privacidade do GitHub' if pt else 'GitHub privacy statement'}{arrow()}</a></details><button type="button" data-close-privacy hidden>{'Entendi' if pt else 'Got it'}</button></section>'''
 
+def contact_dialog(key):
+    pt=key=='pt'
+    title='Como prefere conversar?' if pt else 'How would you like to connect?'
+    body='Escolha um canal e me conte sobre o seu projeto.' if pt else 'Choose a channel and tell me about your project.'
+    options=''.join(f'<a class="contact-option" href="{url}"'+(' target="_blank" rel="noopener noreferrer"' if url.startswith('https:') else '')+f'>{social_icon(icon)}<span><strong>{label}</strong><small>{detail}</small></span>{arrow()}</a>' for icon,label,detail,url in [('Email','E-mail' if pt else 'Email','huderpg@gmail.com','mailto:huderpg@gmail.com'),('Instagram','Instagram','@_huderpg_',IG),('TikTok','TikTok','@hudeplay','https://www.tiktok.com/@hudeplay')])
+    return f'''<dialog class="contact-dialog" id="contact-dialog" aria-labelledby="contact-dialog-title" aria-describedby="contact-dialog-description"><button class="dialog-close" type="button" data-close-contact aria-label="{'Fechar contato' if pt else 'Close contact'}">×</button><p class="eyebrow">{'PODE ME CHAMAR' if pt else 'GET IN TOUCH'}</p><h2 id="contact-dialog-title">{title}</h2><p id="contact-dialog-description">{body}</p><div class="contact-options">{options}</div></dialog>'''
+
 def contact(key,case=False):
     c=COPY[key]
-    return f'<footer class="site-footer" id="contact"><div class="contact wrap"><div><p class="eyebrow">{c["contactLabel"]}</p><h2>{c["caseEnd" if case else "contactTitle"]}</h2></div><div class="contact-action"><p>{c["contactBody"]}</p><a class="contact-circle" href="{IG}" target="_blank" rel="noopener noreferrer"><span>{c["start"]}</span>{arrow()}</a></div></div>'
+    return f'<footer class="site-footer" id="contact"><div class="contact wrap"><div><p class="eyebrow">{c["contactLabel"]}</p><h2>{c["contactTitle"]}</h2></div><div class="contact-action"><p>{c["contactBody"]}</p><a class="contact-circle" href="mailto:huderpg@gmail.com" data-open-contact aria-haspopup="dialog" aria-controls="contact-dialog"><span>{c["start"]}</span>{arrow()}</a></div></div>'
 
 def home(key):
     d=D[key];c=COPY[key];pre='../' if key=='pt' else ''
     tags=''.join(f'<span>{t}</span>' for t in c['tags'])
-    rows=''.join(f'<details class="service-row"'+(' open' if i==1 else '')+f'><summary><span class="service-num mono">0{i}</span><span class="service-name">{title}<small class="mono">{tag}</small></span><span class="service-plus" aria-hidden="true"></span></summary><div class="service-body"><p>{desc}</p><a href="{IG}" target="_blank" rel="noopener noreferrer">{c["start"]}{arrow()}</a></div></details>' for i,(title,tag,desc) in enumerate(c['serviceRows'],1))
+    rows=''.join(f'<details class="service-row"'+(' open' if i==1 else '')+f'><summary><span class="service-num mono">0{i}</span><span class="service-name">{title}<small class="mono">{tag}</small></span><span class="service-plus" aria-hidden="true"></span></summary><div class="service-body"><p>{desc}</p><a href="mailto:huderpg@gmail.com" data-open-contact aria-haspopup="dialog" aria-controls="contact-dialog">{c["start"]}{arrow()}</a></div></details>' for i,(title,tag,desc) in enumerate(c['serviceRows'],1))
     socials=''.join(f'<a href="{url}" target="_blank" rel="noopener noreferrer"><span class="profile-label">{social_icon(name)}<span>{name}<small>{handle}</small></span></span>{arrow()}</a>' for name,handle,url in [('YouTube','@Hudezin','https://www.youtube.com/@Hudezin'),('Instagram','@_huderpg_',IG),('TikTok','@hudeplay','https://www.tiktok.com/@hudeplay')])
     return head(key,pre)+header(key)+f'''<main id="main">
 <section class="hero wrap"><div class="hero-top mono"><span>{c['role']}</span><span class="availability"><i></i>{c['availability']}</span></div><div class="hero-grid"><h1>{c['hero']}</h1><div class="hero-intro"><p>{c['intro']}</p><a class="text-link" href="#work">{c['work']}{arrow('right')}</a></div></div></section>
