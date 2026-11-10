@@ -17,7 +17,6 @@ COPY = {
             ['Automated character sheets', 'CORE SERVICE', 'A sheet built around your rules, with a clear layout and the calculations your players need. Visual identity, editable fields and system-specific logic, defined together.'],
             ['Original RPG systems', 'GAME & SYSTEM DESIGN', 'From an initial concept to an organized ruleset. Mechanics, character structure and game information developed as a coherent whole.'],
             ['Web character interfaces', 'INTERACTIVE TOOLS', 'Browser-based sheets that make character information easier to navigate, edit and use during a session.'],
-            ['RPG cinematics', 'ATMOSPHERE & MOTION', 'Visual sequences that set the tone, introduce a world or give an important moment the presence it deserves.']
         ],
         'approachLabel': '02 / HOW WE GET THERE', 'approachTitle':'From your idea.<br><em>To the table.</em>',
         'steps': [['Discover','We talk about your game, the people playing it and what your current tools are missing.'],['Design & build','I shape the information, visual language and agreed mechanics into a tool made for your system.'],['Play & refine','We use game examples to test the experience, resolve friction and prepare the final handoff.']],
@@ -30,7 +29,7 @@ COPY = {
         'designStudy':'Interface visualization · sample character',
         'caseHero':'A character is more<br><em>than a list of numbers.</em>',
         'caseHeroBody':'UTOPIA brings the many parts of a character into one focused, editable workspace. A personal project in interface design and tabletop tools.',
-        'caseMeta': [['PROJECT','UTOPIA / Personal'],['DISCIPLINES','Interface · Development'],['FORMAT','Browser-based character hub'],['CONTEXT','Original tabletop RPG']],
+        'caseMeta': [['PROJECT','UTOPIA'],['DISCIPLINES','Interface · Development'],['FORMAT','Browser-based character hub'],['CONTEXT','Original tabletop RPG']],
         'caseOverview':'THE IDEA', 'caseHeading':'Complexity in the rules.<br><em>Clarity in the interface.</em>',
         'caseOverviewBody':'Identity, physical and mental attributes, resources, inventory and body modifications all need their place. The interface organizes these different layers into a single visual language, with dedicated spaces for the information players need.',
         'caseChoices':[['Information first','Clear groups and a consistent hierarchy make the character easier to read and navigate.'],['A world of its own','Violet panels, technical typography and a body map connect the interface to the game’s cybernetic setting.'],['Tools for play','Character records, dice rolls and JSON backup support the everyday use of the sheet.']],
@@ -58,7 +57,6 @@ COPY = {
             ['Fichas automáticas','SERVIÇO PRINCIPAL','Uma ficha construída ao redor das suas regras, com organização clara e os cálculos de que seus jogadores precisam. Identidade visual, campos editáveis e lógica do sistema definidos com você.'],
             ['Sistemas autorais de RPG','GAME & SYSTEM DESIGN','De um conceito inicial a um conjunto organizado de regras. Mecânicas, estrutura de personagens e informações do jogo desenvolvidas como um todo.'],
             ['Fichas em sites','FERRAMENTAS INTERATIVAS','Interfaces no navegador que tornam as informações do personagem mais fáceis de encontrar, editar e usar durante uma sessão.'],
-            ['Cinematics para RPG','ATMOSFERA & MOVIMENTO','Sequências visuais para estabelecer o tom, apresentar um universo ou dar presença a um momento importante da sua história.']
         ],
         'approachLabel':'02 / COMO ACONTECE', 'approachTitle':'Da sua ideia.<br><em>Para a mesa.</em>',
         'steps':[['Entender','Conversamos sobre o seu jogo, quem vai jogá-lo e o que falta nas ferramentas que você usa hoje.'],['Desenhar & construir','Organizo as informações, a linguagem visual e as mecânicas combinadas em uma ferramenta feita para o seu sistema.'],['Jogar & refinar','Usamos exemplos de jogo para testar a experiência, ajustar os detalhes e preparar a entrega final.']],
@@ -71,7 +69,7 @@ COPY = {
         'designStudy':'Visualização de interface · personagem de exemplo',
         'caseHero':'Um personagem é mais<br><em>que uma lista de números.</em>',
         'caseHeroBody':'UTOPIA reúne as diferentes partes de um personagem em um espaço editável e organizado. Um projeto autoral de design de interface e ferramentas para RPG.',
-        'caseMeta':[['PROJETO','UTOPIA / Autoral'],['DISCIPLINAS','Interface · Desenvolvimento'],['FORMATO','Central de personagens web'],['CONTEXTO','RPG de mesa autoral']],
+        'caseMeta':[['PROJETO','UTOPIA'],['DISCIPLINAS','Interface · Desenvolvimento'],['FORMATO','Central de personagens web'],['CONTEXTO','RPG de mesa autoral']],
         'caseOverview':'A IDEIA', 'caseHeading':'Regras complexas.<br><em>Uma interface clara.</em>',
         'caseOverviewBody':'Identidade, atributos físicos e mentais, recursos, inventário e modificações corporais precisam ter seu lugar. A interface organiza essas camadas em uma única linguagem visual, com espaços dedicados às informações de que os jogadores precisam.',
         'caseChoices':[['A informação vem primeiro','Grupos claros e uma hierarquia consistente facilitam a leitura e a navegação pelas informações do personagem.'],['Um universo próprio','Painéis violetas, tipografia técnica e um mapa corporal conectam a interface ao cenário cibernético do jogo.'],['Ferramentas para jogar','Registros de personagens, rolagens e backup em JSON apoiam o uso cotidiano da ficha.']],
