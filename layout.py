@@ -2,6 +2,8 @@
 from pathlib import Path
 from html import escape as e
 import json
+import hashlib
+import base64
 from content import D
 from editorial import COPY
 from demo import sheet
@@ -9,7 +11,7 @@ from demo import sheet
 ROOT=Path(__file__).parent
 BASE='https://harley-aguilar.github.io/Huderpg/'
 IG='https://www.instagram.com/_huderpg_/'
-VERSION='bold-socials-1'
+VERSION='neon-privacy-1'
 
 def arrow(direction='up'):
     path='M5 19 19 5M5 5h14v14' if direction=='up' else 'M5 12h14m-6-6 6 6-6 6'
@@ -39,8 +41,7 @@ def languages(key,case=False):
 
 def header(key,case=False):
     d=D[key];c=COPY[key];home='../index.html' if case else 'index.html'
-    nav=''.join(f'<a href="{home if case else ""}#{s}"><span class="nav-index">0{i}</span>{t}</a>' for i,(s,t) in enumerate(zip(['work','services'],d['nav'][:2]),1))
-    return f'''<header class="site-header" id="top"><div class="nav wrap">{logo(home)}<div class="brand-descriptor mono">RPG DESIGN<br>& CREATIVE TOOLS</div><nav class="nav-links" id="nav-links" aria-label="{'Navegação principal' if key=='pt' else 'Main navigation'}">{nav}</nav>{languages(key,case)}<a class="nav-contact" href="{IG}" target="_blank" rel="noopener noreferrer">{c['start']}{arrow()}</a><button class="menu-toggle" type="button" aria-label="{d['menu']}" aria-controls="nav-links" aria-expanded="false"><span></span><span></span></button></div></header>'''
+    return f'''<header class="site-header" id="top"><div class="nav wrap">{logo(home)}<div class="brand-descriptor mono">RPG DESIGN<br>& CREATIVE TOOLS</div>{languages(key,case)}<a class="nav-contact" href="{IG}" target="_blank" rel="noopener noreferrer">{c['start']}{arrow()}</a></div></header>'''
 
 def head(key,prefix='',case=False):
     d=D[key]
@@ -49,18 +50,21 @@ def head(key,prefix='',case=False):
     altpt=BASE+'pt/'+('projects/utopia.html' if case else '')
     title=('UTOPIA — '+d['title']) if case else d['title']
     schema={'@context':'https://schema.org','@type':'Person','name':'Harley Aguilar','alternateName':'Hude','url':BASE+('pt/' if key=='pt' else ''),'sameAs':['https://www.youtube.com/@Hudezin',IG,'https://www.tiktok.com/@hudeplay']}
+    schema_json=json.dumps(schema,ensure_ascii=False)
+    schema_hash=base64.b64encode(hashlib.sha256(schema_json.encode()).digest()).decode()
+    policy="default-src 'none'; script-src 'self' 'sha256-"+schema_hash+"'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'"
     return f'''<!doctype html><html lang="{d['lang']}"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#141116"><meta name="color-scheme" content="dark"><title>{e(title)}</title><meta name="description" content="{e(d['description'])}">
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="{policy}"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#141116"><meta name="color-scheme" content="dark"><title>{e(title)}</title><meta name="description" content="{e(d['description'])}">
 <link rel="canonical" href="{BASE+route}"><link rel="alternate" hreflang="en" href="{alt}"><link rel="alternate" hreflang="pt-BR" href="{altpt}"><link rel="alternate" hreflang="x-default" href="{alt}">
 <meta property="og:type" content="website"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(d['description'])}"><meta property="og:url" content="{BASE+route}">
-<link rel="icon" type="image/svg+xml" href="{prefix}assets/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{prefix}assets/style.css?v={VERSION}"><script src="{prefix}assets/app.js?v={VERSION}" defer></script><script type="application/ld+json">{json.dumps(schema,ensure_ascii=False)}</script></head><body><a class="skip" href="#main">{d['skip']}</a>'''
+<link rel="icon" type="image/svg+xml" href="{prefix}assets/favicon.svg">
+
+<link rel="stylesheet" href="{prefix}assets/style.css?v={VERSION}"><script src="{prefix}assets/app.js?v={VERSION}" defer></script><script type="application/ld+json">{schema_json}</script></head><body><a class="skip" href="#main">{d['skip']}</a>'''
 
 def project_art(key,prefix=''):
     d=D[key];c=COPY[key]
     attrs=''.join(f'<div><span>{x}</span><b>0{v}</b></div>' for x,v in zip(d['attrs'],[2,3,2]))
-    bars=''.join(f'<div class="art-resource"><div><span>{x}</span><b>{v} / {m}</b></div><i style="--fill:{v/m*100:.1f}%"></i></div>' for x,v,m in zip(d['resources'],[18,12,8],[24,16,12]))
+    bars=''.join(f'<div class="art-resource"><div><span>{x}</span><b>{v} / {m}</b></div><i></i></div>' for x,v,m in zip(d['resources'],[18,12,8],[24,16,12]))
     return f'''<div class="art-background" aria-hidden="true"><div class="art-grid"></div><span class="art-word">UTOPIA</span>{die('art-die')}<div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div></div>
 <div class="stage-top mono"><span>UTOPIA — 01</span><span>{c['personal'].upper()} / 2026</span></div>
 <div class="art-composition" aria-hidden="true"><div class="implant-card"><div class="implant-header mono"><span>{d['tabs'][2]}</span><span>12 SLOTS</span></div><img class="implant-body" src="{prefix}assets/body.svg" width="192" height="300" alt="" loading="lazy"><span class="map-point point-a"></span><span class="map-point point-b"></span><span class="map-point point-c"></span><div class="map-scale"><span>NEURAL</span><i></i><span>35%</span></div><div class="implant-bottom mono">BODY MAPPING / U.03</div></div>
@@ -69,7 +73,15 @@ def project_art(key,prefix=''):
 
 def footer(key,home='index.html'):
     d=D[key];c=COPY[key]
-    return f'<div class="footer-bottom wrap"><span class="mono">© 2026 HUDE · {d["country"]}</span><span>{c["footer"]}</span><a href="#top">{c["backTop"]}{arrow()}</a></div><div class="footer-word wrap" aria-hidden="true">hude<span>.</span></div></footer></body></html>'
+    return f'<div class="footer-bottom wrap"><span class="mono">© 2026 HUDE · {d["country"]}</span><span>{c["footer"]}</span><a class="privacy-link" href="#privacy-notice" data-open-privacy>{"Privacidade" if key=="pt" else "Privacy"}</a><a href="#top">{c["backTop"]}{arrow()}</a></div></footer>'+privacy_notice(key)+'</body></html>'
+
+def privacy_notice(key):
+    pt=key=='pt'
+    title='Sua privacidade' if pt else 'Your privacy'
+    summary='Este portfólio não usa cookies de rastreamento, anúncios ou ferramentas de análise. As fontes são carregadas pelo próprio site.' if pt else 'This portfolio uses no tracking cookies, ads or analytics. Fonts are served by this website.'
+    details='O que você precisa saber' if pt else 'What you should know'
+    text='A hospedagem no GitHub Pages registra endereços IP para segurança. Os dados digitados na demonstração ficam apenas na página e são apagados ao recarregar. Ao fechar este aviso, uma preferência é salva somente nesta sessão da aba, sem identificador de visitante. Links para redes sociais abrem serviços com políticas próprias. Evite inserir dados pessoais na demonstração.' if pt else 'GitHub Pages logs IP addresses for security. Data entered in the demonstration stays in the page and resets on reload. Dismissing this notice stores only a preference for this tab session, without a visitor identifier. Social links open services with their own policies. Avoid entering personal data in the demonstration.'
+    return f'''<section class="privacy-notice" id="privacy-notice" role="region" aria-labelledby="privacy-title"><h2 id="privacy-title" tabindex="-1">{title}</h2><p>{summary}</p><details><summary>{details}</summary><p>{text}</p><a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">{'Privacidade do GitHub' if pt else 'GitHub privacy statement'}{arrow()}</a></details><button type="button" data-close-privacy hidden>{'Entendi' if pt else 'Got it'}</button></section>'''
 
 def contact(key,case=False):
     c=COPY[key]

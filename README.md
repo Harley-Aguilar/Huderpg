@@ -22,7 +22,7 @@ Open `http://localhost:8000`. No Node dependencies or compilation are required.
 
 Update bilingual copy in `content.py` and `editorial.py`, and page templates in `layout.py`, then run `python3 build.py`. The interactive sheet preview is rendered by `demo.py`. Styling is in `assets/style.css`; interactions are in `assets/app.js`.
 
-The portfolio demonstration uses sample data and does not persist personal information, contain analytics, or include the complete UTOPIA application. External profile links open in a separate tab. Google Fonts supplies Space Grotesk and IBM Plex Mono, with local system fallbacks.
+The portfolio demonstration uses sample data and does not persist personal information, contain analytics, or include the complete UTOPIA application. External profile links open in a separate tab. Manrope and IBM Plex Mono are self-hosted with their OFL licenses; no Google Fonts connections are made.
 
 ## GitHub Pages
 
@@ -37,7 +37,7 @@ Published from `main`, folder `/ (root)`, through GitHub Pages. A `.nojekyll` fi
 
 ## Editorial art direction
 
-The redesign combines a warm paper palette, terracotta accents, Manrope with Instrument Serif, fine rules, large project imagery and an original polyhedral mark. Project visuals are editable HTML/SVG interface studies, clearly labeled as sample data. The body silhouette is retained from the owner’s UTOPIA source.
+The portfolio uses a permanent dark palette, nonbinary purple, bold Manrope headings, a gently glowing header rule, large project imagery and an original polyhedral mark. Project visuals are editable HTML/SVG interface studies, clearly labeled as sample data. The body silhouette is retained from the owner’s UTOPIA source.
 
 References studied (inspiration, no third-party artwork reused):
 
@@ -47,3 +47,9 @@ References studied (inspiration, no third-party artwork reused):
 - [WCAG contrast guidance](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html): readable foreground/background combinations and focus states.
 
 No invented commercial results, client testimonials or additional project credits were introduced. The visual language of UTOPIA remains distinct from the portfolio’s editorial identity. Motion respects reduced-motion preferences; content and service disclosures remain available without JavaScript.
+
+## Privacy and security
+
+All five HTML pages declare a restrictive Content Security Policy through a meta element: local scripts, styles, images and fonts only; no outbound fetches, forms, frames, plugins or base URL changes. JSON-LD is allowed by its generated SHA-256 hash. Inline executable scripts and inline styles are not allowed. External links use noopener/noreferrer; a no-referrer policy applies to the pages. GitHub Pages serves the site over HTTPS. Header-only protections such as frame-ancestors are not claimed by this static meta policy.
+
+A bilingual privacy notice appears on first entry in each tab session. Only its dismissal preference is stored in sessionStorage; no visitor ID is generated. If storage is unavailable, the notice remains dismissible on the current page. It can be reopened from the footer. It explains the absence of site tracking, session storage, the temporary demo values, external profiles and GitHub Pages IP security logs. Acknowledgement is not presented as tracking consent.
