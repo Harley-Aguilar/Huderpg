@@ -56,4 +56,4 @@ A bilingual privacy notice appears on first entry in each tab session. Only its 
 
 ## Current typography and header interaction
 
-Squartiqa (owner supplied) is used for display headings. Self-hosted Chakra Petch Medium/Bold is the reading face, with its OFL license alongside the fonts. The header d20 is a separate keyboard-accessible button rather than part of the home link. Clicking animates a tumble and announces a uniform crypto-random d20 result; reduced-motion users receive the result without the tumble.
+Squartiqa (owner supplied) is used for display headings. Self-hosted Chakra Petch Medium/Bold is the reading face, with its OFL license alongside the fonts. The header d20 is a static decorative mark. Portfolio spacing uses consistent section, text and control gaps across desktop and compact layouts.

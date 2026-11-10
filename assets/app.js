@@ -25,15 +25,3 @@ if(contactDialog&&typeof contactDialog.showModal==='function'){
  contactDialog.addEventListener('click',event=>{if(event.target===contactDialog&&contactDialog.classList.contains('is-focused')){const box=contactDialog.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)closeContact();}});
 }
 
-document.querySelectorAll('[data-roll-brand]').forEach(button=>{
- const output=button.parentElement.querySelector('[data-brand-result]');
- const pt=document.documentElement.lang==='pt-BR';
- button.addEventListener('click',()=>{
-  if(button.disabled)return;
-  button.disabled=true;button.classList.add('is-rolling');button.setAttribute('aria-busy','true');output.textContent=pt?'Rolando…':'Rolling…';
-  const bytes=new Uint32Array(1),limit=Math.floor(4294967296/20)*20;
-  do{crypto.getRandomValues(bytes);}while(bytes[0]>=limit);
-  const value=bytes[0]%20+1;
-  setTimeout(()=>{button.classList.remove('is-rolling');button.disabled=false;button.removeAttribute('aria-busy');output.textContent=`d20 · ${value}`;},matchMedia('(prefers-reduced-motion: reduce)').matches?0:1100);
- });
-});

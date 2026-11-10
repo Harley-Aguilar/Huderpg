@@ -11,7 +11,7 @@ from demo import sheet
 ROOT=Path(__file__).parent
 BASE='https://harley-aguilar.github.io/Huderpg/'
 IG='https://www.instagram.com/_huderpg_/'
-VERSION='d20-chakra-2'
+VERSION='spacing-refinement-1'
 
 def arrow(direction='up'):
     path='M5 19 19 5M5 5h14v14' if direction=='up' else 'M5 12h14m-6-6 6 6-6 6'
@@ -30,8 +30,7 @@ def social_icon(name):
     return '<svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+icons[name]+'</svg>'
 
 def logo(home='index.html',key='en'):
-    label='Rolar d20' if key=='pt' else 'Roll d20'
-    return f'<div class="brand-lockup"><a class="wordmark" href="{home}" aria-label="Hude — Home">hude<span class="logo-dot">.</span></a><button class="d20-roll" type="button" data-roll-brand aria-label="{label}">{die()}</button><output class="brand-roll-result" data-brand-result role="status" aria-live="polite" aria-atomic="true"></output></div>'
+    return f'<div class="brand-lockup"><a class="wordmark" href="{home}" aria-label="Hude — Home">hude<span class="logo-dot">.</span></a><span class="brand-die" aria-hidden="true">{die()}</span></div>'
 
 def btn(text,url,outline=False):
     ext=' target="_blank" rel="noopener noreferrer"' if url.startswith('https://') else ''
