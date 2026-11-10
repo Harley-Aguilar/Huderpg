@@ -11,7 +11,7 @@ from demo import sheet
 ROOT=Path(__file__).parent
 BASE='https://harley-aguilar.github.io/Huderpg/'
 IG='https://www.instagram.com/_huderpg_/'
-VERSION='contact-dialog-1'
+VERSION='contact-panel-1'
 
 def arrow(direction='up'):
     path='M5 19 19 5M5 5h14v14' if direction=='up' else 'M5 12h14m-6-6 6 6-6 6'
@@ -89,11 +89,11 @@ def contact_dialog(key):
     title='Como prefere conversar?' if pt else 'How would you like to connect?'
     body='Escolha um canal e me conte sobre o seu projeto.' if pt else 'Choose a channel and tell me about your project.'
     options=''.join(f'<a class="contact-option" href="{url}"'+(' target="_blank" rel="noopener noreferrer"' if url.startswith('https:') else '')+f'>{social_icon(icon)}<span><strong>{label}</strong><small>{detail}</small></span>{arrow()}</a>' for icon,label,detail,url in [('Email','E-mail' if pt else 'Email','huderpg@gmail.com','mailto:huderpg@gmail.com'),('Instagram','Instagram','@_huderpg_',IG),('TikTok','TikTok','@hudeplay','https://www.tiktok.com/@hudeplay')])
-    return f'''<dialog class="contact-dialog" id="contact-dialog" aria-labelledby="contact-dialog-title" aria-describedby="contact-dialog-description"><button class="dialog-close" type="button" data-close-contact aria-label="{'Fechar contato' if pt else 'Close contact'}">×</button><p class="eyebrow">{'PODE ME CHAMAR' if pt else 'GET IN TOUCH'}</p><h2 id="contact-dialog-title">{title}</h2><p id="contact-dialog-description">{body}</p><div class="contact-options">{options}</div></dialog>'''
+    return f'''<dialog class="contact-dialog" id="contact-dialog" aria-labelledby="contact-dialog-title" aria-describedby="contact-dialog-description"><button class="dialog-close" type="button" data-close-contact aria-label="{'Fechar contato' if pt else 'Close contact'}">×</button><p class="eyebrow">{'PODE ME CHAMAR' if pt else 'GET IN TOUCH'}</p><h2 id="contact-dialog-title">{title}</h2><p id="contact-dialog-description">{body}</p><div class="contact-options">{options}</div><button class="contact-mode" type="button" data-toggle-contact-focus aria-pressed="false" data-focus-label="{'Colocar em foco' if pt else 'Focus view'}" data-dock-label="{'Deixar na lateral' if pt else 'Move to the side'}">{'Colocar em foco' if pt else 'Focus view'}</button></dialog>'''
 
 def contact(key,case=False):
     c=COPY[key]
-    return f'<footer class="site-footer" id="contact"><div class="contact wrap"><div><p class="eyebrow">{c["contactLabel"]}</p><h2>{c["contactTitle"]}</h2></div><div class="contact-action"><p>{c["contactBody"]}</p><a class="contact-circle" href="mailto:huderpg@gmail.com" data-open-contact aria-haspopup="dialog" aria-controls="contact-dialog"><span>{c["start"]}</span>{arrow()}</a></div></div>'
+    return f'<footer class="site-footer" id="contact"><div class="contact wrap"><div><p class="eyebrow">{c["contactLabel"]}</p><h2>{c["contactTitle"]}</h2></div><div class="contact-action"><p>{c["contactBody"]}</p><a class="nav-contact footer-contact" href="mailto:huderpg@gmail.com" data-open-contact aria-haspopup="dialog" aria-controls="contact-dialog"><span>{c["start"]}</span>{arrow()}</a></div></div>'
 
 def home(key):
     d=D[key];c=COPY[key];pre='../' if key=='pt' else ''

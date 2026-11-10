@@ -10,9 +10,17 @@ if(privacyNotice){
  closePrivacy.addEventListener('click',()=>{privacyNotice.hidden=true;try{sessionStorage.setItem(privacyKey,'dismissed');}catch{}const link=document.querySelector('[data-open-privacy]');if(link)link.focus({preventScroll:true});});
 }
 
+
 const contactDialog=document.getElementById('contact-dialog');
 if(contactDialog&&typeof contactDialog.showModal==='function'){
- document.querySelectorAll('[data-open-contact]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();contactDialog.showModal();}));
- contactDialog.querySelector('[data-close-contact]').addEventListener('click',()=>contactDialog.close());
- contactDialog.addEventListener('click',event=>{if(event.target===contactDialog){const box=contactDialog.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)contactDialog.close();}});
+ const mode=contactDialog.querySelector('[data-toggle-contact-focus]');
+ let lastContactTrigger;
+ function setMode(focused){contactDialog.classList.toggle('is-focused',focused);mode.setAttribute('aria-pressed',String(focused));mode.textContent=focused?mode.dataset.dockLabel:mode.dataset.focusLabel;}
+ function closeContact(){contactDialog.close();if(lastContactTrigger)lastContactTrigger.focus({preventScroll:true});}
+ document.querySelectorAll('[data-open-contact]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();lastContactTrigger=link;if(!contactDialog.open){setMode(false);contactDialog.show();}contactDialog.querySelector('[data-close-contact]').focus({preventScroll:true});}));
+ contactDialog.querySelector('[data-close-contact]').addEventListener('click',closeContact);
+ mode.addEventListener('click',()=>{const focused=!contactDialog.classList.contains('is-focused');contactDialog.close();setMode(focused);if(focused)contactDialog.showModal();else contactDialog.show();mode.focus({preventScroll:true});});
+ contactDialog.addEventListener('cancel',event=>{event.preventDefault();closeContact();});
+ contactDialog.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();closeContact();}});
+ contactDialog.addEventListener('click',event=>{if(event.target===contactDialog&&contactDialog.classList.contains('is-focused')){const box=contactDialog.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)closeContact();}});
 }
