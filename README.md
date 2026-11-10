@@ -26,8 +26,11 @@ The portfolio demonstration uses sample data and does not persist personal infor
 
 ## GitHub Pages
 
-The repository is ready to publish from `main`, folder `/ (root)`, in Settings → Pages. A `.nojekyll` file is included. Publication is subject to the owner’s visibility approval and the GitHub plan’s Pages availability.
+Published from `main`, folder `/ (root)`, through GitHub Pages. A `.nojekyll` file is included.
+
+- English: https://harley-aguilar.github.io/Huderpg/
+- Português: https://harley-aguilar.github.io/Huderpg/pt/index.html
 
 ## Validation
 
-`python3 check_site.py` checks language metadata, local links, canonical URLs and required interactive controls. `node --check assets/app.js` checks JavaScript syntax. Browser verification of layout and interactions is pending publication approval.
+`python3 check_site.py` checks language metadata, local links, canonical URLs and required interactive controls. `node --check assets/app.js` checks JavaScript syntax. Live browser checks passed for English/Portuguese navigation, case pages, editable name and attributes, resource sliders, inventory/implant tabs, keyboard tab navigation and dice rolls.
