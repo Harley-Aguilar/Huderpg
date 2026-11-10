@@ -9,7 +9,7 @@ from demo import sheet
 ROOT=Path(__file__).parent
 BASE='https://harley-aguilar.github.io/Huderpg/'
 IG='https://www.instagram.com/_huderpg_/'
-VERSION='dark-purple-1'
+VERSION='bold-socials-1'
 
 def arrow(direction='up'):
     path='M5 19 19 5M5 5h14v14' if direction=='up' else 'M5 12h14m-6-6 6 6-6 6'
@@ -17,6 +17,14 @@ def arrow(direction='up'):
 
 def die(cls=''):
     return f'<svg class="die {cls}" aria-hidden="true" width="240" height="260" viewBox="0 0 240 260" fill="none"><path d="M120 9 222 68v121l-102 62L18 189V68L120 9Z"/><path d="m120 9 54 86 48-27M18 68l48 27 54-86M18 189l48-94h108l48 94M18 189l102-20 102 20M66 95l54 74 54-74M120 169v82"/><circle cx="120" cy="169" r="3" fill="currentColor" stroke="none"/></svg>'
+
+def social_icon(name):
+    icons = {
+        'YouTube': '<rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3Z" fill="currentColor" stroke="none"/>',
+        'Instagram': '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>',
+        'TikTok': '<path d="M14 3h3c.3 2.4 1.7 4 4 4.5v3a9.7 9.7 0 0 1-4-1.6V16a6 6 0 1 1-7-5.9v3.1a3 3 0 1 0 4 2.8Z"/>'
+    }
+    return '<svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+icons[name]+'</svg>'
 
 def logo(home='index.html'):
     return f'<a class="wordmark" href="{home}" aria-label="Hude — Home">hude<span class="logo-dot">.</span>{die()}</a>'
@@ -46,7 +54,7 @@ def head(key,prefix='',case=False):
 <link rel="canonical" href="{BASE+route}"><link rel="alternate" hreflang="en" href="{alt}"><link rel="alternate" hreflang="pt-BR" href="{altpt}"><link rel="alternate" hreflang="x-default" href="{alt}">
 <meta property="og:type" content="website"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(d['description'])}"><meta property="og:url" content="{BASE+route}">
 <link rel="icon" type="image/svg+xml" href="{prefix}assets/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{prefix}assets/style.css?v={VERSION}"><script src="{prefix}assets/app.js?v={VERSION}" defer></script><script type="application/ld+json">{json.dumps(schema,ensure_ascii=False)}</script></head><body><a class="skip" href="#main">{d['skip']}</a>'''
 
 def project_art(key,prefix=''):
@@ -71,13 +79,13 @@ def home(key):
     d=D[key];c=COPY[key];pre='../' if key=='pt' else ''
     tags=''.join(f'<span>{t}</span>' for t in c['tags'])
     rows=''.join(f'<details class="service-row"'+(' open' if i==1 else '')+f'><summary><span class="service-num mono">0{i}</span><span class="service-name">{title}<small class="mono">{tag}</small></span><span class="service-plus" aria-hidden="true"></span></summary><div class="service-body"><p>{desc}</p><a href="{IG}" target="_blank" rel="noopener noreferrer">{c["start"]}{arrow()}</a></div></details>' for i,(title,tag,desc) in enumerate(c['serviceRows'],1))
-    socials=''.join(f'<a href="{url}" target="_blank" rel="noopener noreferrer"><span>{name}<small>{handle}</small></span>{arrow()}</a>' for name,handle,url in [('YouTube','@Hudezin','https://www.youtube.com/@Hudezin'),('Instagram','@_huderpg_',IG),('TikTok','@hudeplay','https://www.tiktok.com/@hudeplay')])
+    socials=''.join(f'<a href="{url}" target="_blank" rel="noopener noreferrer"><span class="profile-label">{social_icon(name)}<span>{name}<small>{handle}</small></span></span>{arrow()}</a>' for name,handle,url in [('YouTube','@Hudezin','https://www.youtube.com/@Hudezin'),('Instagram','@_huderpg_',IG),('TikTok','@hudeplay','https://www.tiktok.com/@hudeplay')])
     return head(key,pre)+header(key)+f'''<main id="main">
-<section class="hero wrap"><div class="hero-top mono"><span>{c['role']}</span><span class="availability"><i></i>{c['availability']}</span></div><div class="hero-grid"><h1>{c['hero']}</h1><div class="hero-intro"><p>{c['intro']}</p><a class="text-link" href="#work">{c['work']}{arrow('right')}</a><span class="hero-location mono">HARLEY AGUILAR / {d['country']}</span></div></div></section>
+<section class="hero wrap"><div class="hero-top mono"><span>{c['role']}</span><span class="availability"><i></i>{c['availability']}</span></div><div class="hero-grid"><h1>{c['hero']}</h1><div class="hero-intro"><p>{c['intro']}</p><a class="text-link" href="#work">{c['work']}{arrow('right')}</a></div></div></section>
 <section class="selected-work wrap" id="work" aria-label="{d['nav'][0]}"><div class="work-heading mono"><span>{c['portfolio']}</span><span>{"ROLE PARA EXPLORAR" if key=="pt" else "SCROLL TO EXPLORE"}</span></div><a class="project-stage" href="projects/utopia.html" aria-label="{c['stage']}">{project_art(key,pre)}</a><article class="project-caption"><div><p class="eyebrow">01 / UTOPIA</p><h2>{c['caseTitle']}</h2></div><div class="project-copy"><p>{c['caseDescription']}</p><div class="project-tags mono">{tags}</div><a class="text-link" href="projects/utopia.html">{c['viewCase']}{arrow()}</a><span class="project-disclosure mono">{c['designStudy']}</span></div></article></section>
 <div class="manifesto wrap"><span class="manifesto-mark" aria-hidden="true">{die()}</span><p>{c['studioLine']}</p><span class="mono">{c['studioNote'].replace(chr(10),'<br>')}</span></div>
 <section class="services wrap" id="services"><div class="section-intro"><p class="eyebrow">{c['servicesLabel']}</p><h2>{c['services']}</h2><p>{d['intro']}</p></div><div class="service-list">{rows}</div></section>
-<section class="about wrap" id="about"><div class="creator-art" aria-hidden="true"><span class="mono">INDEPENDENT BY DESIGN.</span>{die('creator-die')}<div class="creator-signature">hude.</div><span class="creator-index mono">RPG / DESIGN / PLAY</span></div><div class="about-content"><p class="eyebrow">{c['aboutLabel']}</p><h2>{c['aboutTitle']}</h2><p>{c['bio']}</p><p class="about-secondary">{c['bio2']}</p><nav class="socials" aria-label="Social"><span class="eyebrow">{c['follow']}</span>{socials}</nav></div></section>
+<section class="profiles wrap" id="profiles"><nav class="profile-links" aria-label="{'Perfis sociais' if key=='pt' else 'Social profiles'}">{socials}</nav></section>
 </main>'''+contact(key)+footer(key)
 
 def case(key):
