@@ -9,7 +9,7 @@ from demo import sheet
 ROOT=Path(__file__).parent
 BASE='https://harley-aguilar.github.io/Huderpg/'
 IG='https://www.instagram.com/_huderpg_/'
-VERSION='editorial-3'
+VERSION='dark-purple-1'
 
 def arrow(direction='up'):
     path='M5 19 19 5M5 5h14v14' if direction=='up' else 'M5 12h14m-6-6 6 6-6 6'
@@ -31,7 +31,7 @@ def languages(key,case=False):
 
 def header(key,case=False):
     d=D[key];c=COPY[key];home='../index.html' if case else 'index.html'
-    nav=''.join(f'<a href="{home if case else ""}#{s}"><span class="nav-index">0{i}</span>{t}</a>' for i,(s,t) in enumerate(zip(['work','services','process'],d['nav']),1))
+    nav=''.join(f'<a href="{home if case else ""}#{s}"><span class="nav-index">0{i}</span>{t}</a>' for i,(s,t) in enumerate(zip(['work','services'],d['nav'][:2]),1))
     return f'''<header class="site-header" id="top"><div class="nav wrap">{logo(home)}<div class="brand-descriptor mono">RPG DESIGN<br>& CREATIVE TOOLS</div><nav class="nav-links" id="nav-links" aria-label="{'Navegação principal' if key=='pt' else 'Main navigation'}">{nav}</nav>{languages(key,case)}<a class="nav-contact" href="{IG}" target="_blank" rel="noopener noreferrer">{c['start']}{arrow()}</a><button class="menu-toggle" type="button" aria-label="{d['menu']}" aria-controls="nav-links" aria-expanded="false"><span></span><span></span></button></div></header>'''
 
 def head(key,prefix='',case=False):
@@ -42,7 +42,7 @@ def head(key,prefix='',case=False):
     title=('UTOPIA — '+d['title']) if case else d['title']
     schema={'@context':'https://schema.org','@type':'Person','name':'Harley Aguilar','alternateName':'Hude','url':BASE+('pt/' if key=='pt' else ''),'sameAs':['https://www.youtube.com/@Hudezin',IG,'https://www.tiktok.com/@hudeplay']}
     return f'''<!doctype html><html lang="{d['lang']}"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f2f0e9"><title>{e(title)}</title><meta name="description" content="{e(d['description'])}">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#141116"><meta name="color-scheme" content="dark"><title>{e(title)}</title><meta name="description" content="{e(d['description'])}">
 <link rel="canonical" href="{BASE+route}"><link rel="alternate" hreflang="en" href="{alt}"><link rel="alternate" hreflang="pt-BR" href="{altpt}"><link rel="alternate" hreflang="x-default" href="{alt}">
 <meta property="og:type" content="website"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(d['description'])}"><meta property="og:url" content="{BASE+route}">
 <link rel="icon" type="image/svg+xml" href="{prefix}assets/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,14 +71,12 @@ def home(key):
     d=D[key];c=COPY[key];pre='../' if key=='pt' else ''
     tags=''.join(f'<span>{t}</span>' for t in c['tags'])
     rows=''.join(f'<details class="service-row"'+(' open' if i==1 else '')+f'><summary><span class="service-num mono">0{i}</span><span class="service-name">{title}<small class="mono">{tag}</small></span><span class="service-plus" aria-hidden="true"></span></summary><div class="service-body"><p>{desc}</p><a href="{IG}" target="_blank" rel="noopener noreferrer">{c["start"]}{arrow()}</a></div></details>' for i,(title,tag,desc) in enumerate(c['serviceRows'],1))
-    steps=''.join(f'<article class="step"><span class="step-number">0{i}<span>/</span></span><h3>{title}</h3><p>{desc}</p></article>' for i,(title,desc) in enumerate(c['steps'],1))
     socials=''.join(f'<a href="{url}" target="_blank" rel="noopener noreferrer"><span>{name}<small>{handle}</small></span>{arrow()}</a>' for name,handle,url in [('YouTube','@Hudezin','https://www.youtube.com/@Hudezin'),('Instagram','@_huderpg_',IG),('TikTok','@hudeplay','https://www.tiktok.com/@hudeplay')])
     return head(key,pre)+header(key)+f'''<main id="main">
 <section class="hero wrap"><div class="hero-top mono"><span>{c['role']}</span><span class="availability"><i></i>{c['availability']}</span></div><div class="hero-grid"><h1>{c['hero']}</h1><div class="hero-intro"><p>{c['intro']}</p><a class="text-link" href="#work">{c['work']}{arrow('right')}</a><span class="hero-location mono">HARLEY AGUILAR / {d['country']}</span></div></div></section>
 <section class="selected-work wrap" id="work" aria-label="{d['nav'][0]}"><div class="work-heading mono"><span>{c['portfolio']}</span><span>{"ROLE PARA EXPLORAR" if key=="pt" else "SCROLL TO EXPLORE"}</span></div><a class="project-stage" href="projects/utopia.html" aria-label="{c['stage']}">{project_art(key,pre)}</a><article class="project-caption"><div><p class="eyebrow">01 / UTOPIA</p><h2>{c['caseTitle']}</h2></div><div class="project-copy"><p>{c['caseDescription']}</p><div class="project-tags mono">{tags}</div><a class="text-link" href="projects/utopia.html">{c['viewCase']}{arrow()}</a><span class="project-disclosure mono">{c['designStudy']}</span></div></article></section>
 <div class="manifesto wrap"><span class="manifesto-mark" aria-hidden="true">{die()}</span><p>{c['studioLine']}</p><span class="mono">{c['studioNote'].replace(chr(10),'<br>')}</span></div>
 <section class="services wrap" id="services"><div class="section-intro"><p class="eyebrow">{c['servicesLabel']}</p><h2>{c['services']}</h2><p>{d['intro']}</p></div><div class="service-list">{rows}</div></section>
-<section class="approach" id="process"><div class="wrap"><div class="approach-heading"><p class="eyebrow">{c['approachLabel']}</p><h2>{c['approachTitle']}</h2></div><div class="steps">{steps}</div></div></section>
 <section class="about wrap" id="about"><div class="creator-art" aria-hidden="true"><span class="mono">INDEPENDENT BY DESIGN.</span>{die('creator-die')}<div class="creator-signature">hude.</div><span class="creator-index mono">RPG / DESIGN / PLAY</span></div><div class="about-content"><p class="eyebrow">{c['aboutLabel']}</p><h2>{c['aboutTitle']}</h2><p>{c['bio']}</p><p class="about-secondary">{c['bio2']}</p><nav class="socials" aria-label="Social"><span class="eyebrow">{c['follow']}</span>{socials}</nav></div></section>
 </main>'''+contact(key)+footer(key)
 
