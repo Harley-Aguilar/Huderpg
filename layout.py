@@ -11,7 +11,7 @@ from demo import sheet
 ROOT=Path(__file__).parent
 BASE='https://harley-aguilar.github.io/Huderpg/'
 IG='https://www.instagram.com/_huderpg_/'
-VERSION='neon-privacy-1'
+VERSION='large-text-1'
 
 def arrow(direction='up'):
     path='M5 19 19 5M5 5h14v14' if direction=='up' else 'M5 12h14m-6-6 6 6-6 6'
@@ -41,7 +41,7 @@ def languages(key,case=False):
 
 def header(key,case=False):
     d=D[key];c=COPY[key];home='../index.html' if case else 'index.html'
-    return f'''<header class="site-header" id="top"><div class="nav wrap">{logo(home)}<div class="brand-descriptor mono">RPG DESIGN<br>& CREATIVE TOOLS</div>{languages(key,case)}<a class="nav-contact" href="{IG}" target="_blank" rel="noopener noreferrer">{c['start']}{arrow()}</a></div></header>'''
+    return f'''<header class="site-header" id="top"><div class="nav wrap">{logo(home)}{languages(key,case)}<a class="nav-contact" href="{IG}" target="_blank" rel="noopener noreferrer">{c['start']}{arrow()}</a></div></header>'''
 
 def head(key,prefix='',case=False):
     d=D[key]
