@@ -64,3 +64,5 @@ body{font-weight:500}.mono,.eyebrow{font-weight:500}.brand-lockup{display:flex;a
 @keyframes d20-tumble{0%{transform:translateY(0) rotateX(0) rotateY(0) rotateZ(0)}24%{transform:translateY(-12px) rotateX(160deg) rotateY(100deg) rotateZ(95deg)}52%{transform:translateY(3px) rotateX(360deg) rotateY(280deg) rotateZ(230deg)}76%{transform:translateY(-5px) rotateX(590deg) rotateY(590deg) rotateZ(325deg)}100%{transform:translateY(0) rotateX(720deg) rotateY(720deg) rotateZ(360deg)}}
 @media(max-width:700px){.brand-lockup{gap:8px}.d20-roll{width:44px;height:44px}.d20-roll .die{width:28px;height:31px}}
 @media(prefers-reduced-motion:reduce){.d20-roll.is-rolling .die{animation:none}}
+
+@media(max-width:700px){.site-header .nav-contact{margin-top:20px}}
