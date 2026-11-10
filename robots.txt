@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /Huderpg/
+Sitemap: https://harley-aguilar.github.io/Huderpg/sitemap.xml
