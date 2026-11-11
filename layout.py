@@ -11,7 +11,7 @@ from demo import sheet
 ROOT=Path(__file__).parent
 BASE='https://harley-aguilar.github.io/Huderpg/'
 IG='https://www.instagram.com/_huderpg_/'
-VERSION='case-spacing-1'
+VERSION='manifesto-removal-1'
 
 def arrow(direction='up'):
     path='M5 19 19 5M5 5h14v14' if direction=='up' else 'M5 12h14m-6-6 6 6-6 6'
@@ -116,7 +116,6 @@ def home(key):
     return head(key,pre)+header(key)+f'''<main id="main">
 <section class="hero wrap"><div class="hero-top mono"><span class="availability"><i></i>{c['availability']}</span></div><div class="hero-grid"><h1>{c['hero']}</h1><div class="hero-intro"><p>{c['intro']}</p><a class="text-link" href="#work"><span>{c['work']}</span>{arrow('right')}</a></div></div></section>
 <section class="selected-work wrap" id="work" aria-label="{d['nav'][0]}"><a class="project-stage" href="projects/utopia.html" aria-label="{c['stage']}">{project_art(key,pre)}</a><article class="project-caption"><h2>{c['caseTitle']}</h2><p class="project-description">{c['caseDescription']}</p><div class="project-meta"><div class="project-tags mono">{tags}</div><a class="text-link" href="projects/utopia.html"><span>{c['viewCase']}</span>{arrow()}</a></div><span class="project-disclosure mono">{c['designStudy']}</span></article></section>
-<div class="manifesto wrap"><span class="manifesto-mark" aria-hidden="true">{die()}</span><div class="manifesto-copy"><p>{c['studioLine']}</p><span class="mono">{c['studioNote'].replace(chr(10),' · ')}</span></div></div>
 <section class="services wrap" id="services"><div class="service-list">{rows}</div></section>
 <section class="profiles wrap" id="profiles"><nav class="profile-links" aria-label="{'Perfis sociais' if key=='pt' else 'Social profiles'}">{socials}</nav></section>
 </main>'''+contact(key)+footer(key)
