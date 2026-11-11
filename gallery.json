@@ -16,14 +16,6 @@
     "height": 2048
   },
   {
-    "slug": "especializacoes",
-    "pt": "Especializações de combate",
-    "en": "Combat specializations",
-    "group": "systems",
-    "width": 1447,
-    "height": 2048
-  },
-  {
     "slug": "utopia-capa",
     "pt": "UTOPIA · Capa",
     "en": "UTOPIA · Cover",
@@ -67,6 +59,14 @@
     "slug": "combatente",
     "pt": "Combatente",
     "en": "Combatant",
+    "group": "systems",
+    "width": 1447,
+    "height": 2048
+  },
+  {
+    "slug": "especializacoes",
+    "pt": "Especializações de combate",
+    "en": "Combat specializations",
     "group": "systems",
     "width": 1447,
     "height": 2048
