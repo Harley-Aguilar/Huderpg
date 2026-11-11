@@ -35,7 +35,7 @@ COPY = {
         'detailsLabel':'DESIGN DECISIONS', 'demoLabel':'TRY THE INTERFACE',
         'demoTitle':'A little less reading.<br><em>A little more playing.</em>',
         'scopeTitle':'About this demonstration',
-        'scope':'The interactive preview uses sample data. You can edit fields, adjust resources and roll dice; changes reset on reload. The complete UTOPIA project includes local character storage and JSON backup. This version does not include player accounts, cloud synchronization or automated game rules.',
+        'scope':'The interactive preview uses sample data. You can register and edit implants and adjust cybernetics; changes reset on reload. The complete UTOPIA project includes local character storage and JSON backup. This version does not include player accounts, cloud synchronization or automated game rules.',
         'caseEnd':'Your system deserves<br><em>its own language.</em>',
         'narrative':'Systems, sheets & stories', 'open':'Open', 'close':'Close',
     },
@@ -74,7 +74,7 @@ COPY = {
         'detailsLabel':'DECISÕES DE DESIGN', 'demoLabel':'EXPERIMENTE A INTERFACE',
         'demoTitle':'Um pouco menos de leitura.<br><em>Um pouco mais de jogo.</em>',
         'scopeTitle':'Sobre esta demonstração',
-        'scope':'A prévia interativa usa dados de exemplo. Você pode editar campos, ajustar recursos e rolar dados; as alterações reiniciam ao recarregar. O projeto completo UTOPIA inclui personagens salvos no navegador e backup em JSON. Esta versão não inclui contas de jogadores, sincronização na nuvem ou automação de regras.',
+        'scope':'A prévia interativa usa dados de exemplo. Você pode registrar e editar implantes e ajustar a cibernética; as alterações reiniciam ao recarregar. O projeto completo UTOPIA inclui personagens salvos no navegador e backup em JSON. Esta versão não inclui contas de jogadores, sincronização na nuvem ou automação de regras.',
         'caseEnd':'Seu sistema merece<br><em>sua própria linguagem.</em>',
         'narrative':'Sistemas, fichas & histórias', 'open':'Abrir', 'close':'Fechar',
     }

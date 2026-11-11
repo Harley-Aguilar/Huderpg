@@ -35,7 +35,6 @@ for file,p in pages.items():
         assert target.exists(),(file,link,'broken local link')
         if parts.fragment and target in pages:assert parts.fragment in pages[target].ids,(file,link,'missing anchor')
     if file.name=='utopia.html':
-        assert len([c for c in p.controls if 'data-resource' in c])==3
-        assert len([c for c in p.controls if c.get('role')=='tab'])==3
-        assert any('data-roll' in c for c in p.controls)
+        assert any('assets/utopia-implants/' in link for link in p.links)
+        assert not any('data-resource' in c or 'data-roll' in c or c.get('role')=='tab' for c in p.controls)
 print(f'PASS: {len(pages)} pages; local links, anchors, language metadata, headings and demo controls.')
