@@ -11,7 +11,7 @@ from demo import sheet
 ROOT=Path(__file__).parent
 BASE='https://harley-aguilar.github.io/Huderpg/'
 IG='https://www.instagram.com/_huderpg_/'
-VERSION='gallery-cleanup-1'
+VERSION='design-system-1'
 
 def arrow(direction='up'):
     path='M5 19 19 5M5 5h14v14' if direction=='up' else 'M5 12h14m-6-6 6 6-6 6'
@@ -42,7 +42,7 @@ def languages(key,case=False):
 
 def header(key,case=False):
     d=D[key];c=COPY[key];home='../index.html' if case else 'index.html'
-    return f'''<header class="site-header" id="top"><div class="nav wrap">{logo(home,key)}{languages(key,case)}<a class="nav-contact" href="mailto:huderpg@gmail.com" data-open-contact aria-haspopup="dialog" aria-controls="contact-dialog">{c['start']}{arrow()}</a></div></header>'''
+    return f'''<header class="site-header" id="top"><div class="nav wrap">{logo(home,key)}{languages(key,case)}<a class="nav-contact" href="mailto:huderpg@gmail.com" data-open-contact aria-haspopup="dialog" aria-controls="contact-dialog"><span>{c['start']}</span>{arrow()}</a></div></header>'''
 
 def head(key,prefix='',case=False):
     d=D[key]
@@ -111,12 +111,12 @@ def image_dialog(key):
 def home(key):
     d=D[key];c=COPY[key];pre='../' if key=='pt' else ''
     tags=''.join(f'<span>{t}</span>' for t in c['tags'])
-    rows=''.join(f'<details class="service-row"'+(' open' if i in (1,2) else '')+f'><summary><span class="service-name">{title}<small class="mono">{tag}</small></span><span class="service-plus" aria-hidden="true"></span></summary><div class="service-body"><p>{desc}</p><a href="mailto:huderpg@gmail.com" data-open-contact aria-haspopup="dialog" aria-controls="contact-dialog">{c["start"]}{arrow()}</a>{image_gallery(key,"sheets" if i==1 else "systems",pre) if i in (1,2) else ""}</div></details>' for i,(title,tag,desc) in enumerate(c['serviceRows'],1))
+    rows=''.join(f'<details class="service-row"'+(' open' if i in (1,2) else '')+f'><summary><span class="service-name"><span class="service-title">{title}</span><small class="mono">{tag}</small></span><span class="service-plus" aria-hidden="true"></span></summary><div class="service-body"><div class="service-intro"><p>{desc}</p><a class="text-link" href="mailto:huderpg@gmail.com" data-open-contact aria-haspopup="dialog" aria-controls="contact-dialog"><span>{c["start"]}</span>{arrow()}</a></div>{image_gallery(key,"sheets" if i==1 else "systems",pre) if i in (1,2) else ""}</div></details>' for i,(title,tag,desc) in enumerate(c['serviceRows'],1))
     socials=''.join(f'<a href="{url}" target="_blank" rel="noopener noreferrer"><span class="profile-label">{social_icon(name)}<span>{name}<small>{handle}</small></span></span>{arrow()}</a>' for name,handle,url in [('YouTube','@Hudezin','https://www.youtube.com/@Hudezin'),('Instagram','@_huderpg_',IG),('TikTok','@hudeplay','https://www.tiktok.com/@hudeplay')])
     return head(key,pre)+header(key)+f'''<main id="main">
-<section class="hero wrap"><div class="hero-top mono"><span class="availability"><i></i>{c['availability']}</span></div><div class="hero-grid"><h1>{c['hero']}</h1><div class="hero-intro"><p>{c['intro']}</p><a class="text-link" href="#work">{c['work']}{arrow('right')}</a></div></div></section>
-<section class="selected-work wrap" id="work" aria-label="{d['nav'][0]}"><a class="project-stage" href="projects/utopia.html" aria-label="{c['stage']}">{project_art(key,pre)}</a><article class="project-caption"><div><h2>{c['caseTitle']}</h2></div><div class="project-copy"><p>{c['caseDescription']}</p><div class="project-tags mono">{tags}</div><a class="text-link" href="projects/utopia.html">{c['viewCase']}{arrow()}</a><span class="project-disclosure mono">{c['designStudy']}</span></div></article></section>
-<div class="manifesto wrap"><span class="manifesto-mark" aria-hidden="true">{die()}</span><p>{c['studioLine']}</p><span class="mono">{c['studioNote'].replace(chr(10),'<br>')}</span></div>
+<section class="hero wrap"><div class="hero-top mono"><span class="availability"><i></i>{c['availability']}</span></div><div class="hero-grid"><h1>{c['hero']}</h1><div class="hero-intro"><p>{c['intro']}</p><a class="text-link" href="#work"><span>{c['work']}</span>{arrow('right')}</a></div></div></section>
+<section class="selected-work wrap" id="work" aria-label="{d['nav'][0]}"><a class="project-stage" href="projects/utopia.html" aria-label="{c['stage']}">{project_art(key,pre)}</a><article class="project-caption"><h2>{c['caseTitle']}</h2><p class="project-description">{c['caseDescription']}</p><div class="project-meta"><div class="project-tags mono">{tags}</div><a class="text-link" href="projects/utopia.html"><span>{c['viewCase']}</span>{arrow()}</a></div><span class="project-disclosure mono">{c['designStudy']}</span></article></section>
+<div class="manifesto wrap"><span class="manifesto-mark" aria-hidden="true">{die()}</span><div class="manifesto-copy"><p>{c['studioLine']}</p><span class="mono">{c['studioNote'].replace(chr(10),' · ')}</span></div></div>
 <section class="services wrap" id="services"><div class="service-list">{rows}</div></section>
 <section class="profiles wrap" id="profiles"><nav class="profile-links" aria-label="{'Perfis sociais' if key=='pt' else 'Social profiles'}">{socials}</nav></section>
 </main>'''+contact(key)+footer(key)
