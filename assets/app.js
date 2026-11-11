@@ -43,3 +43,13 @@ if(imageDialog&&typeof imageDialog.showModal==='function'){
  imageDialog.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();moveImage(event.key==='ArrowLeft'?-1:1);}});
  imageDialog.addEventListener('close',()=>{full.removeAttribute('src');if(trigger)trigger.focus({preventScroll:true});});
 }
+
+// Fit the official local module to its contents as tabs and records change.
+document.querySelectorAll('.official-implants').forEach(frame=>{
+ frame.addEventListener('load',()=>{
+  const content=frame.contentDocument?.querySelector('.content');
+  if(!content)return;
+  const fit=()=>{if(content.getBoundingClientRect().width)frame.style.height=Math.ceil(content.getBoundingClientRect().height+24)+'px';};
+  new ResizeObserver(fit).observe(content);fit();
+ });
+});

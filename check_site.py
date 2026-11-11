@@ -22,7 +22,7 @@ for file in ROOT.rglob('*.html'):
     p=Page();p.feed(file.read_text());pages[file]=p
     assert p.h1==1,(file,'one main heading required')
     assert len(p.ids)==len(set(p.ids)),(file,'duplicate IDs')
-    assert p.lang==('pt-BR' if 'pt' in file.relative_to(ROOT).parts else 'en'),(file,'language')
+    assert p.lang==('pt-BR' if ('pt' in file.relative_to(ROOT).parts or file.relative_to(ROOT).as_posix()=='assets/utopia-implants/index.html') else 'en'),(file,'language')
     assert p.canonical and p.canonical.startswith('https://harley-aguilar.github.io/Huderpg/'),(file,'canonical')
 for file,p in pages.items():
     for link in p.links:
