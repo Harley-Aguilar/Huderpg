@@ -11,7 +11,7 @@ from demo import sheet
 ROOT=Path(__file__).parent
 BASE='https://harley-aguilar.github.io/Huderpg/'
 IG='https://www.instagram.com/_huderpg_/'
-VERSION='galleries-1'
+VERSION='galleries-2'
 
 def arrow(direction='up'):
     path='M5 19 19 5M5 5h14v14' if direction=='up' else 'M5 12h14m-6-6 6 6-6 6'
@@ -101,8 +101,8 @@ def image_gallery(key,group,prefix):
     for item in items:
         if item['group']!=group: continue
         label=e(item[key]);slug=item['slug']
-        cards.append(f'<figure class="gallery-card"><a href="{prefix}assets/gallery/{slug}.webp" data-gallery="{group}" data-caption="{label}" aria-label="{label} — {hint}" aria-haspopup="dialog" aria-controls="image-dialog"><span class="gallery-preview"><img src="{prefix}assets/gallery/{slug}-thumb.webp" width="{item["width"]}" height="{item["height"]}" alt="{label}" loading="lazy" decoding="async"><span class="gallery-expand" aria-hidden="true">↗</span></span><span class="gallery-caption">{label}</span></a></figure>')
-    return f'<div class="portfolio-gallery"><p class="gallery-hint">{hint} {arrow()}</p><div class="gallery-grid">'+''.join(cards)+'</div></div>'
+        cards.append(f'<figure class="gallery-card"><a href="{prefix}assets/gallery/{slug}.webp" data-gallery="{group}" data-caption="{label}" aria-label="{label} — {hint}" aria-haspopup="dialog" aria-controls="image-dialog"><span class="gallery-preview"><img src="{prefix}assets/gallery/{slug}-thumb.webp" width="{item["width"]}" height="{item["height"]}" alt="{label}" loading="lazy" decoding="async"><span class="gallery-expand" aria-hidden="true">{arrow()}</span></span><span class="gallery-caption">{label}</span></a></figure>')
+    return f'<div class="portfolio-gallery gallery-{group}"><p class="gallery-hint">{hint} {arrow()}</p><div class="gallery-grid">'+''.join(cards)+'</div></div>'
 
 def image_dialog(key):
     pt=key=='pt'
