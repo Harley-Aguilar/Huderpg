@@ -11,7 +11,7 @@ from demo import sheet
 ROOT=Path(__file__).parent
 BASE='https://harley-aguilar.github.io/Huderpg/'
 IG='https://www.instagram.com/_huderpg_/'
-VERSION='implants-clean-1'
+VERSION='case-cleanup-1'
 
 def arrow(direction='up'):
     path='M5 19 19 5M5 5h14v14' if direction=='up' else 'M5 12h14m-6-6 6 6-6 6'
@@ -123,9 +123,7 @@ def home(key):
 
 def case(key):
     d=D[key];c=COPY[key];pre='../../' if key=='pt' else '../'
-    meta=''.join(f'<div><dt class="mono">{label}</dt><dd>{value}</dd></div>' for label,value in c['caseMeta'])
-    choices=''.join(f'<article><h3>{title}</h3><p>{desc}</p></article>' for i,(title,desc) in enumerate(c['caseChoices'],1))
-    return head(key,pre,True)+header(key,True)+f'''<main id="main"><section class="case-hero wrap"><a class="case-back text-link" href="../index.html#work">{arrow('right')}{d['back']}</a><div class="case-hero-top"><h1>UTOPIA</h1></div><div class="case-heading"><h2>{c['caseHero']}</h2><p>{c['caseHeroBody']}</p></div><dl class="case-meta">{meta}</dl></section><section class="case-showcase wrap" aria-label="UTOPIA"><div class="project-stage case-stage">{project_art(key,pre)}</div><p class="case-image-caption mono">{c['designStudy']}</p></section><section class="case-overview wrap"><p class="eyebrow">{c['caseOverview']}</p><div><h2>{c['caseHeading']}</h2><p>{c['caseOverviewBody']}</p></div></section><section class="case-choices wrap"><p class="eyebrow">{c['detailsLabel']}</p><div class="choice-grid">{choices}</div></section><section class="interactive-section" id="demo"><div class="wrap"><div class="interactive-heading"><div><p class="eyebrow">{c['demoLabel']}</p><h2>{c['demoTitle']}</h2></div><p>{'Selecione os pontos do mapa, registre implantes e ajuste a cibernética.' if key=='pt' else 'Select points on the map, register implants and adjust cybernetics.'}</p></div><div class="demo implants-only"><iframe class="official-implants" src="{pre}assets/utopia-implants/{'index.html' if key=='pt' else 'en.html'}?v=implants-clean-1" title="{'Implantes — ficha oficial UTOPIA' if key=='pt' else 'Implants — official UTOPIA sheet'}" loading="lazy"></iframe></div><details class="scope"><summary>{c['scopeTitle']}<span class="service-plus" aria-hidden="true"></span></summary><p>{c['scope']}</p></details></div></section></main>'''+contact(key,True)+footer(key,'../index.html')
+    return head(key,pre,True)+header(key,True)+f'''<main id="main"><section class="case-hero wrap"><a class="case-back text-link" href="../index.html#work">{arrow('right')}{d['back']}</a><div class="case-hero-top"><h1>UTOPIA</h1></div><div class="case-heading"><h2>{c['caseHero']}</h2><p>{c['caseHeroBody']}</p></div></section><section class="case-showcase wrap" aria-label="UTOPIA"><div class="project-stage case-stage">{project_art(key,pre)}</div><p class="case-image-caption mono">{c['designStudy']}</p></section><section class="case-overview wrap"><div><h2>{c['caseHeading']}</h2><p>{c['caseOverviewBody']}</p></div></section><section class="interactive-section" id="demo"><div class="wrap"><div class="interactive-heading"><div><p class="eyebrow">{c['demoLabel']}</p><h2>{c['demoTitle']}</h2></div><p>{'Selecione os pontos do mapa, registre implantes e ajuste a cibernética.' if key=='pt' else 'Select points on the map, register implants and adjust cybernetics.'}</p></div><div class="demo implants-only"><iframe class="official-implants" src="{pre}assets/utopia-implants/{'index.html' if key=='pt' else 'en.html'}?v=implants-clean-1" title="{'Implantes — ficha oficial UTOPIA' if key=='pt' else 'Implants — official UTOPIA sheet'}" loading="lazy"></iframe></div></div></section></main>'''+contact(key,True)+footer(key,'../index.html')
 
 def build():
     for key in D:
