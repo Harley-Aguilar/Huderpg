@@ -11,7 +11,7 @@ from demo import sheet
 ROOT=Path(__file__).parent
 BASE='https://harley-aguilar.github.io/Huderpg/'
 IG='https://www.instagram.com/_huderpg_/'
-VERSION='content-cleanup-1'
+VERSION='galleries-1'
 
 def arrow(direction='up'):
     path='M5 19 19 5M5 5h14v14' if direction=='up' else 'M5 12h14m-6-6 6 6-6 6'
@@ -73,7 +73,7 @@ def project_art(key,prefix=''):
 
 def footer(key,home='index.html'):
     d=D[key];c=COPY[key]
-    return f'<div class="footer-bottom wrap"><span class="mono">© 2026 HUDE · {d["country"]}</span><a class="privacy-link" href="#privacy-notice" data-open-privacy>{"Privacidade" if key=="pt" else "Privacy"}</a><a href="#top">{c["backTop"]}{arrow()}</a></div></footer>'+privacy_notice(key)+contact_dialog(key)+'</body></html>'
+    return f'<div class="footer-bottom wrap"><span class="mono">© 2026 HUDE · {d["country"]}</span><a class="privacy-link" href="#privacy-notice" data-open-privacy>{"Privacidade" if key=="pt" else "Privacy"}</a><a href="#top">{c["backTop"]}{arrow()}</a></div></footer>'+privacy_notice(key)+contact_dialog(key)+image_dialog(key)+'</body></html>'
 
 def privacy_notice(key):
     pt=key=='pt'
@@ -94,10 +94,24 @@ def contact(key,case=False):
     c=COPY[key]
     return f'<footer class="site-footer" id="contact"><div class="contact wrap"><div><p class="eyebrow">{c["contactLabel"]}</p><h2>{c["contactTitle"]}</h2></div><div class="contact-action"><p>{c["contactBody"]}</p><a class="nav-contact footer-contact" href="mailto:huderpg@gmail.com" data-open-contact aria-haspopup="dialog" aria-controls="contact-dialog"><span>{c["start"]}</span>{arrow()}</a></div></div>'
 
+def image_gallery(key,group,prefix):
+    items=json.loads((ROOT/'gallery.json').read_text())
+    hint='Clique para ampliar' if key=='pt' else 'Click to enlarge'
+    cards=[]
+    for item in items:
+        if item['group']!=group: continue
+        label=e(item[key]);slug=item['slug']
+        cards.append(f'<figure class="gallery-card"><a href="{prefix}assets/gallery/{slug}.webp" data-gallery="{group}" data-caption="{label}" aria-label="{label} — {hint}" aria-haspopup="dialog" aria-controls="image-dialog"><span class="gallery-preview"><img src="{prefix}assets/gallery/{slug}-thumb.webp" width="{item["width"]}" height="{item["height"]}" alt="{label}" loading="lazy" decoding="async"><span class="gallery-expand" aria-hidden="true">↗</span></span><span class="gallery-caption">{label}</span></a></figure>')
+    return f'<div class="portfolio-gallery"><p class="gallery-hint">{hint} {arrow()}</p><div class="gallery-grid">'+''.join(cards)+'</div></div>'
+
+def image_dialog(key):
+    pt=key=='pt'
+    return f'''<dialog class="image-dialog" id="image-dialog" aria-label="{'Visualização da imagem' if pt else 'Image viewer'}"><div class="image-toolbar"><p id="image-caption" aria-live="polite"></p><button class="image-zoom" type="button" data-image-zoom aria-pressed="false">{'Zoom' if pt else 'Zoom'}</button><button type="button" data-close-image aria-label="{'Fechar imagem' if pt else 'Close image'}">×</button></div><div class="image-canvas"><img id="image-full" alt=""></div><div class="image-navigation"><button type="button" data-image-prev aria-label="{'Imagem anterior' if pt else 'Previous image'}">←</button><span id="image-count" aria-live="polite"></span><button type="button" data-image-next aria-label="{'Próxima imagem' if pt else 'Next image'}">→</button></div></dialog>'''
+
 def home(key):
     d=D[key];c=COPY[key];pre='../' if key=='pt' else ''
     tags=''.join(f'<span>{t}</span>' for t in c['tags'])
-    rows=''.join(f'<details class="service-row"'+(' open' if i==1 else '')+f'><summary><span class="service-num mono">0{i}</span><span class="service-name">{title}<small class="mono">{tag}</small></span><span class="service-plus" aria-hidden="true"></span></summary><div class="service-body"><p>{desc}</p><a href="mailto:huderpg@gmail.com" data-open-contact aria-haspopup="dialog" aria-controls="contact-dialog">{c["start"]}{arrow()}</a></div></details>' for i,(title,tag,desc) in enumerate(c['serviceRows'],1))
+    rows=''.join(f'<details class="service-row"'+(' open' if i in (1,2) else '')+f'><summary><span class="service-num mono">0{i}</span><span class="service-name">{title}<small class="mono">{tag}</small></span><span class="service-plus" aria-hidden="true"></span></summary><div class="service-body"><p>{desc}</p><a href="mailto:huderpg@gmail.com" data-open-contact aria-haspopup="dialog" aria-controls="contact-dialog">{c["start"]}{arrow()}</a>{image_gallery(key,"sheets" if i==1 else "systems",pre) if i in (1,2) else ""}</div></details>' for i,(title,tag,desc) in enumerate(c['serviceRows'],1))
     socials=''.join(f'<a href="{url}" target="_blank" rel="noopener noreferrer"><span class="profile-label">{social_icon(name)}<span>{name}<small>{handle}</small></span></span>{arrow()}</a>' for name,handle,url in [('YouTube','@Hudezin','https://www.youtube.com/@Hudezin'),('Instagram','@_huderpg_',IG),('TikTok','@hudeplay','https://www.tiktok.com/@hudeplay')])
     return head(key,pre)+header(key)+f'''<main id="main">
 <section class="hero wrap"><div class="hero-top mono"><span class="availability"><i></i>{c['availability']}</span></div><div class="hero-grid"><h1>{c['hero']}</h1><div class="hero-intro"><p>{c['intro']}</p><a class="text-link" href="#work">{c['work']}{arrow('right')}</a></div></div></section>

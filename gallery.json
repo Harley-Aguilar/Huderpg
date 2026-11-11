@@ -1,0 +1,74 @@
+[
+  {
+    "slug": "ficha-personagem",
+    "pt": "Ficha de personagem",
+    "en": "Character sheet",
+    "group": "sheets",
+    "width": 1447,
+    "height": 2048
+  },
+  {
+    "slug": "mapa-implantes",
+    "pt": "Mapa de implantes",
+    "en": "Implant map",
+    "group": "sheets",
+    "width": 1447,
+    "height": 2048
+  },
+  {
+    "slug": "especializacoes",
+    "pt": "Especializações de combate",
+    "en": "Combat specializations",
+    "group": "systems",
+    "width": 1447,
+    "height": 2048
+  },
+  {
+    "slug": "utopia-capa",
+    "pt": "UTOPIA · Capa",
+    "en": "UTOPIA · Cover",
+    "group": "systems",
+    "width": 1447,
+    "height": 2048
+  },
+  {
+    "slug": "utopia-creditos",
+    "pt": "Créditos",
+    "en": "Credits",
+    "group": "systems",
+    "width": 1447,
+    "height": 2048
+  },
+  {
+    "slug": "criacao-personagem",
+    "pt": "Criação de personagem",
+    "en": "Character creation",
+    "group": "systems",
+    "width": 1447,
+    "height": 2048
+  },
+  {
+    "slug": "atributos",
+    "pt": "Atributos",
+    "en": "Attributes",
+    "group": "systems",
+    "width": 1447,
+    "height": 2048
+  },
+  {
+    "slug": "antecedentes",
+    "pt": "Antecedentes",
+    "en": "Backgrounds",
+    "group": "systems",
+    "width": 1447,
+    "height": 2048
+  },
+  {
+    "slug": "combatente",
+    "pt": "Combatente",
+    "en": "Combatant",
+    "group": "systems",
+    "width": 1447,
+    "height": 2048
+  }
+]

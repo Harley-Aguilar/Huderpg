@@ -25,3 +25,21 @@ if(contactDialog&&typeof contactDialog.showModal==='function'){
  contactDialog.addEventListener('click',event=>{if(event.target===contactDialog&&contactDialog.classList.contains('is-focused')){const box=contactDialog.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)closeContact();}});
 }
 
+
+// Local image galleries: keyboard navigation and native modal focus management.
+const imageDialog=document.getElementById('image-dialog');
+if(imageDialog&&typeof imageDialog.showModal==='function'){
+ const full=imageDialog.querySelector('#image-full');
+ const caption=imageDialog.querySelector('#image-caption');
+ const count=imageDialog.querySelector('#image-count');
+ let gallery=[],current=0,trigger;
+ function renderImage(){imageDialog.classList.remove('is-zoomed');imageDialog.querySelector('[data-image-zoom]').setAttribute('aria-pressed','false');const item=gallery[current];full.src=item.href;full.alt=item.dataset.caption;caption.textContent=item.dataset.caption;count.textContent=`${current+1} / ${gallery.length}`;imageDialog.querySelector('.image-canvas').scrollTop=0;}
+ function moveImage(step){current=(current+step+gallery.length)%gallery.length;renderImage();}
+ document.querySelectorAll('[data-gallery]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();trigger=link;gallery=[...document.querySelectorAll('[data-gallery]')].filter(item=>item.dataset.gallery===link.dataset.gallery);current=gallery.indexOf(link);renderImage();imageDialog.showModal();}));
+ imageDialog.querySelector('[data-image-zoom]').addEventListener('click',event=>{const zoomed=imageDialog.classList.toggle('is-zoomed');event.currentTarget.setAttribute('aria-pressed',String(zoomed));});
+ imageDialog.querySelector('[data-close-image]').addEventListener('click',()=>imageDialog.close());
+ imageDialog.querySelector('[data-image-prev]').addEventListener('click',()=>moveImage(-1));
+ imageDialog.querySelector('[data-image-next]').addEventListener('click',()=>moveImage(1));
+ imageDialog.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();moveImage(event.key==='ArrowLeft'?-1:1);}});
+ imageDialog.addEventListener('close',()=>{full.removeAttribute('src');if(trigger)trigger.focus({preventScroll:true});});
+}
