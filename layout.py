@@ -11,7 +11,7 @@ from demo import sheet
 ROOT=Path(__file__).parent
 BASE='https://harley-aguilar.github.io/Huderpg/'
 IG='https://www.instagram.com/_huderpg_/'
-VERSION='galleries-2'
+VERSION='gallery-cleanup-1'
 
 def arrow(direction='up'):
     path='M5 19 19 5M5 5h14v14' if direction=='up' else 'M5 12h14m-6-6 6 6-6 6'
@@ -102,7 +102,7 @@ def image_gallery(key,group,prefix):
         if item['group']!=group: continue
         label=e(item[key]);slug=item['slug']
         cards.append(f'<figure class="gallery-card"><a href="{prefix}assets/gallery/{slug}.webp" data-gallery="{group}" data-caption="{label}" aria-label="{label} — {hint}" aria-haspopup="dialog" aria-controls="image-dialog"><span class="gallery-preview"><img src="{prefix}assets/gallery/{slug}-thumb.webp" width="{item["width"]}" height="{item["height"]}" alt="{label}" loading="lazy" decoding="async"><span class="gallery-expand" aria-hidden="true">{arrow()}</span></span><span class="gallery-caption">{label}</span></a></figure>')
-    return f'<div class="portfolio-gallery gallery-{group}"><p class="gallery-hint">{hint} {arrow()}</p><div class="gallery-grid">'+''.join(cards)+'</div></div>'
+    return f'<div class="portfolio-gallery gallery-{group}"><div class="gallery-grid">'+''.join(cards)+'</div></div>'
 
 def image_dialog(key):
     pt=key=='pt'
@@ -111,20 +111,20 @@ def image_dialog(key):
 def home(key):
     d=D[key];c=COPY[key];pre='../' if key=='pt' else ''
     tags=''.join(f'<span>{t}</span>' for t in c['tags'])
-    rows=''.join(f'<details class="service-row"'+(' open' if i in (1,2) else '')+f'><summary><span class="service-num mono">0{i}</span><span class="service-name">{title}<small class="mono">{tag}</small></span><span class="service-plus" aria-hidden="true"></span></summary><div class="service-body"><p>{desc}</p><a href="mailto:huderpg@gmail.com" data-open-contact aria-haspopup="dialog" aria-controls="contact-dialog">{c["start"]}{arrow()}</a>{image_gallery(key,"sheets" if i==1 else "systems",pre) if i in (1,2) else ""}</div></details>' for i,(title,tag,desc) in enumerate(c['serviceRows'],1))
+    rows=''.join(f'<details class="service-row"'+(' open' if i in (1,2) else '')+f'><summary><span class="service-name">{title}<small class="mono">{tag}</small></span><span class="service-plus" aria-hidden="true"></span></summary><div class="service-body"><p>{desc}</p><a href="mailto:huderpg@gmail.com" data-open-contact aria-haspopup="dialog" aria-controls="contact-dialog">{c["start"]}{arrow()}</a>{image_gallery(key,"sheets" if i==1 else "systems",pre) if i in (1,2) else ""}</div></details>' for i,(title,tag,desc) in enumerate(c['serviceRows'],1))
     socials=''.join(f'<a href="{url}" target="_blank" rel="noopener noreferrer"><span class="profile-label">{social_icon(name)}<span>{name}<small>{handle}</small></span></span>{arrow()}</a>' for name,handle,url in [('YouTube','@Hudezin','https://www.youtube.com/@Hudezin'),('Instagram','@_huderpg_',IG),('TikTok','@hudeplay','https://www.tiktok.com/@hudeplay')])
     return head(key,pre)+header(key)+f'''<main id="main">
 <section class="hero wrap"><div class="hero-top mono"><span class="availability"><i></i>{c['availability']}</span></div><div class="hero-grid"><h1>{c['hero']}</h1><div class="hero-intro"><p>{c['intro']}</p><a class="text-link" href="#work">{c['work']}{arrow('right')}</a></div></div></section>
 <section class="selected-work wrap" id="work" aria-label="{d['nav'][0]}"><a class="project-stage" href="projects/utopia.html" aria-label="{c['stage']}">{project_art(key,pre)}</a><article class="project-caption"><div><h2>{c['caseTitle']}</h2></div><div class="project-copy"><p>{c['caseDescription']}</p><div class="project-tags mono">{tags}</div><a class="text-link" href="projects/utopia.html">{c['viewCase']}{arrow()}</a><span class="project-disclosure mono">{c['designStudy']}</span></div></article></section>
 <div class="manifesto wrap"><span class="manifesto-mark" aria-hidden="true">{die()}</span><p>{c['studioLine']}</p><span class="mono">{c['studioNote'].replace(chr(10),'<br>')}</span></div>
-<section class="services wrap" id="services"><div class="section-intro"><p class="eyebrow">{c['servicesLabel']}</p><h2>{c['services']}</h2><p>{d['intro']}</p></div><div class="service-list">{rows}</div></section>
+<section class="services wrap" id="services"><div class="service-list">{rows}</div></section>
 <section class="profiles wrap" id="profiles"><nav class="profile-links" aria-label="{'Perfis sociais' if key=='pt' else 'Social profiles'}">{socials}</nav></section>
 </main>'''+contact(key)+footer(key)
 
 def case(key):
     d=D[key];c=COPY[key];pre='../../' if key=='pt' else '../'
     meta=''.join(f'<div><dt class="mono">{label}</dt><dd>{value}</dd></div>' for label,value in c['caseMeta'])
-    choices=''.join(f'<article><span class="mono">0{i}</span><h3>{title}</h3><p>{desc}</p></article>' for i,(title,desc) in enumerate(c['caseChoices'],1))
+    choices=''.join(f'<article><h3>{title}</h3><p>{desc}</p></article>' for i,(title,desc) in enumerate(c['caseChoices'],1))
     return head(key,pre,True)+header(key,True)+f'''<main id="main"><section class="case-hero wrap"><a class="case-back text-link" href="../index.html#work">{arrow('right')}{d['back']}</a><div class="case-hero-top"><h1>UTOPIA</h1></div><div class="case-heading"><h2>{c['caseHero']}</h2><p>{c['caseHeroBody']}</p></div><dl class="case-meta">{meta}</dl></section><section class="case-showcase wrap" aria-label="UTOPIA"><div class="project-stage case-stage">{project_art(key,pre)}</div><p class="case-image-caption mono">{c['designStudy']}</p></section><section class="case-overview wrap"><p class="eyebrow">{c['caseOverview']}</p><div><h2>{c['caseHeading']}</h2><p>{c['caseOverviewBody']}</p></div></section><section class="case-choices wrap"><p class="eyebrow">{c['detailsLabel']}</p><div class="choice-grid">{choices}</div></section><section class="interactive-section" id="demo"><div class="wrap"><div class="interactive-heading"><div><p class="eyebrow">{c['demoLabel']}</p><h2>{c['demoTitle']}</h2></div><p>{d['demoHelp']}</p></div><div class="demo" data-demo>{sheet(d,True,True)}</div><details class="scope"><summary>{c['scopeTitle']}<span class="service-plus" aria-hidden="true"></span></summary><p>{c['scope']}</p></details></div></section></main>'''+contact(key,True)+footer(key,'../index.html')
 
 def build():

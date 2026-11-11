@@ -84,3 +84,7 @@ h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}.hero{padding-block:64px 72px}.her
 .services{display:block}.services .section-intro{max-width:760px;margin-bottom:48px}.services .section-intro>p:last-child{max-width:60ch}.service-body:has(.portfolio-gallery){padding-right:0}.gallery-sheets{max-width:880px}.gallery-systems .gallery-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.gallery-expand .icon-arrow{width:18px;height:18px}.gallery-card a:hover .gallery-expand .icon-arrow{transform:none}
 @media(max-width:1000px){.gallery-systems .gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:700px){.services .section-intro{margin-bottom:32px}.gallery-systems .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Clean service headings without decorative numbering. */
+.service-row summary{grid-template-columns:minmax(0,1fr) 22px}.service-body{padding-left:0}.choice-grid h3{margin-top:0}
+@media(max-width:700px){.service-row summary{grid-template-columns:minmax(0,1fr) 16px}.service-body{padding-left:0}.choice-grid>article{grid-template-columns:1fr}.choice-grid h3,.choice-grid p{grid-column:1}}

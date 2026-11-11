@@ -16,7 +16,6 @@ COPY = {
         'serviceRows': [
             ['Automated character sheets', 'CORE SERVICE', 'A sheet built around your rules, with a clear layout and the calculations your players need. Visual identity, editable fields and system-specific logic, defined together.'],
             ['Original RPG systems', 'GAME & SYSTEM DESIGN', 'From an initial concept to an organized ruleset. Mechanics, character structure and game information developed as a coherent whole.'],
-            ['Web character interfaces', 'INTERACTIVE TOOLS', 'Browser-based sheets that make character information easier to navigate, edit and use during a session.'],
         ],
         'approachLabel': '02 / HOW WE GET THERE', 'approachTitle':'From your idea.<br><em>To the table.</em>',
         'steps': [['Discover','We talk about your game, the people playing it and what your current tools are missing.'],['Design & build','I shape the information, visual language and agreed mechanics into a tool made for your system.'],['Play & refine','We use game examples to test the experience, resolve friction and prepare the final handoff.']],
@@ -56,7 +55,6 @@ COPY = {
         'serviceRows':[
             ['Fichas automáticas','SERVIÇO PRINCIPAL','Uma ficha construída ao redor das suas regras, com organização clara e os cálculos de que seus jogadores precisam. Identidade visual, campos editáveis e lógica do sistema definidos com você.'],
             ['Sistemas autorais de RPG','GAME & SYSTEM DESIGN','De um conceito inicial a um conjunto organizado de regras. Mecânicas, estrutura de personagens e informações do jogo desenvolvidas como um todo.'],
-            ['Fichas em sites','FERRAMENTAS INTERATIVAS','Interfaces no navegador que tornam as informações do personagem mais fáceis de encontrar, editar e usar durante uma sessão.'],
         ],
         'approachLabel':'02 / COMO ACONTECE', 'approachTitle':'Da sua ideia.<br><em>Para a mesa.</em>',
         'steps':[['Entender','Conversamos sobre o seu jogo, quem vai jogá-lo e o que falta nas ferramentas que você usa hoje.'],['Desenhar & construir','Organizo as informações, a linguagem visual e as mecânicas combinadas em uma ferramenta feita para o seu sistema.'],['Jogar & refinar','Usamos exemplos de jogo para testar a experiência, ajustar os detalhes e preparar a entrega final.']],
