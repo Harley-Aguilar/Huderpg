@@ -11,7 +11,7 @@ from demo import sheet
 ROOT=Path(__file__).parent
 BASE='https://harley-aguilar.github.io/Huderpg/'
 IG='https://www.instagram.com/_huderpg_/'
-VERSION='manifesto-removal-1'
+VERSION='discord-contact-1'
 
 def arrow(direction='up'):
     path='M5 19 19 5M5 5h14v14' if direction=='up' else 'M5 12h14m-6-6 6 6-6 6'
@@ -25,6 +25,7 @@ def social_icon(name):
         'Email': '<rect x="2" y="4" width="20" height="16" rx="3"/><path d="m3 6 9 7 9-7"/>',
         'YouTube': '<rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3Z" fill="currentColor" stroke="none"/>',
         'Instagram': '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>',
+        'Discord': '<path d="M8 4.5 5.5 5.3C3.5 8.3 2.5 12 3 16.5L7 19l1.3-2M16 4.5l2.5.8c2 3 3 6.7 2.5 11.2L17 19l-1.3-2M8 6.5a16 16 0 0 1 8 0M7 15.5a12 12 0 0 0 10 0"/><circle cx="8.5" cy="11.5" r="1.3"/><circle cx="15.5" cy="11.5" r="1.3"/>',
         'TikTok': '<path d="M14 3h3c.3 2.4 1.7 4 4 4.5v3a9.7 9.7 0 0 1-4-1.6V16a6 6 0 1 1-7-5.9v3.1a3 3 0 1 0 4 2.8Z"/>'
     }
     return '<svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+icons[name]+'</svg>'
@@ -87,7 +88,7 @@ def contact_dialog(key):
     pt=key=='pt'
     title='Como prefere conversar?' if pt else 'How would you like to connect?'
     body='Escolha um canal e me conte sobre o seu projeto.' if pt else 'Choose a channel and tell me about your project.'
-    options=''.join(f'<a class="contact-option" href="{url}"'+(' target="_blank" rel="noopener noreferrer"' if url.startswith('https:') else '')+f'>{social_icon(icon)}<span><strong>{label}</strong><small>{detail}</small></span>{arrow()}</a>' for icon,label,detail,url in [('Email','E-mail' if pt else 'Email','huderpg@gmail.com','mailto:huderpg@gmail.com'),('Instagram','Instagram','@_huderpg_',IG),('TikTok','TikTok','@hudeplay','https://www.tiktok.com/@hudeplay')])
+    options=''.join(f'<a class="contact-option" href="{url}"'+(' target="_blank" rel="noopener noreferrer"' if url.startswith('https:') else '')+f'>{social_icon(icon)}<span><strong>{label}</strong><small>{detail}</small></span>{arrow()}</a>' for icon,label,detail,url in [('Email','E-mail' if pt else 'Email','huderpg@gmail.com','mailto:huderpg@gmail.com'),('Instagram','Instagram','@_huderpg_',IG),('TikTok','TikTok','@hudeplay','https://www.tiktok.com/@hudeplay'),('Discord','Discord','Abrir perfil' if pt else 'Open profile','https://discord.com/users/430844973584482304')])
     return f'''<dialog class="contact-dialog" id="contact-dialog" aria-labelledby="contact-dialog-title" aria-describedby="contact-dialog-description"><button class="dialog-close" type="button" data-close-contact aria-label="{'Fechar contato' if pt else 'Close contact'}">×</button><p class="eyebrow">{'PODE ME CHAMAR' if pt else 'GET IN TOUCH'}</p><h2 id="contact-dialog-title">{title}</h2><p id="contact-dialog-description">{body}</p><div class="contact-options">{options}</div><button class="contact-mode" type="button" data-toggle-contact-focus aria-pressed="false" data-focus-label="{'Colocar em foco' if pt else 'Focus view'}" data-dock-label="{'Deixar na lateral' if pt else 'Move to the side'}">{'Colocar em foco' if pt else 'Focus view'}</button></dialog>'''
 
 def contact(key,case=False):
