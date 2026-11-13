@@ -183,3 +183,8 @@
 .character-status{position:absolute;right:-3px;bottom:-3px;width:16px;height:16px;background:var(--bg,#141116);border-radius:50%;opacity:0}
 .brand-character:hover .character-status,.brand-character:focus-visible .character-status{opacity:1}
 @media(max-width:760px){.brand-character{width:44px;height:44px}}
+
+/* A more compact header, with the original control sizes preserved. */
+.nav{min-height:92px;padding-block:16px;gap:20px}.brand-lockup{gap:8px}
+@media(max-width:760px){.nav{min-height:88px;padding-block:16px;gap:16px}.brand-lockup{gap:8px}}
+@media(max-width:580px){.nav{gap:12px}.nav>.nav-contact{min-height:52px}}
