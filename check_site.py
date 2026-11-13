@@ -19,6 +19,7 @@ class Page(HTMLParser):
 
 pages={}
 for file in ROOT.rglob('*.html'):
+    if 'dist' in file.relative_to(ROOT).parts: continue
     p=Page();p.feed(file.read_text());pages[file]=p
     assert p.h1==1,(file,'one main heading required')
     assert len(p.ids)==len(set(p.ids)),(file,'duplicate IDs')

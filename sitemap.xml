@@ -1,1 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://harley-aguilar.github.io/Huderpg/</loc></url><url><loc>https://harley-aguilar.github.io/Huderpg/pt/</loc></url><url><loc>https://harley-aguilar.github.io/Huderpg/projects/utopia.html</loc></url><url><loc>https://harley-aguilar.github.io/Huderpg/pt/projects/utopia.html</loc></url></urlset>
+<?xml version='1.0' encoding='utf-8'?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://harley-aguilar.github.io/Huderpg/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://harley-aguilar.github.io/Huderpg/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://harley-aguilar.github.io/Huderpg/pt/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://harley-aguilar.github.io/Huderpg/" />
+  </url>
+  <url>
+    <loc>https://harley-aguilar.github.io/Huderpg/pt/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://harley-aguilar.github.io/Huderpg/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://harley-aguilar.github.io/Huderpg/pt/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://harley-aguilar.github.io/Huderpg/" />
+  </url>
+  <url>
+    <loc>https://harley-aguilar.github.io/Huderpg/projects/utopia.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://harley-aguilar.github.io/Huderpg/projects/utopia.html" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://harley-aguilar.github.io/Huderpg/pt/projects/utopia.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://harley-aguilar.github.io/Huderpg/projects/utopia.html" />
+  </url>
+  <url>
+    <loc>https://harley-aguilar.github.io/Huderpg/pt/projects/utopia.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://harley-aguilar.github.io/Huderpg/projects/utopia.html" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://harley-aguilar.github.io/Huderpg/pt/projects/utopia.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://harley-aguilar.github.io/Huderpg/projects/utopia.html" />
+  </url>
+</urlset>

@@ -194,3 +194,10 @@
 .brand-character:hover{border-color:var(--violet);background:#2c1d38}
 .gallery-sheets .gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media(max-width:760px){.gallery-sheets .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.brand-character{padding:3px}}
+
+/* Semantic service headings retain the established appearance and native toggles. */
+.service-row>summary{display:block}
+.service-summary{display:grid;grid-template-columns:minmax(0,1fr) 24px;align-items:center;gap:24px;font:inherit;letter-spacing:normal;text-wrap:initial}
+.service-row[open] .service-plus:after{transform:rotate(0)}
+@media(max-width:760px){.service-summary{gap:16px}}
+@media(max-width:360px){.wordmark{font-size:36px}.brand-character{width:40px;height:40px}.languages a{min-width:40px;min-height:44px}}

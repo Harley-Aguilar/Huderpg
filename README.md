@@ -1,59 +1,102 @@
-# Huderpg
+# Huderpg — official portfolio
 
-Bilingual portfolio for Hude / Harley Aguilar’s custom RPG character sheets, systems and digital experiences.
+Hude’s bilingual portfolio for custom automated RPG character sheets, original
+tabletop RPG systems and web character sheets. Published by GitHub Pages from
+`main`, repository root; `.nojekyll` preserves the buildless static output.
 
-## Pages
+## Public pages
 
-- English: `index.html`
-- Português: `pt/index.html`
-- UTOPIA case and interactive demonstration: `projects/utopia.html` and `pt/projects/utopia.html`
+| Page | English | Português |
+| --- | --- | --- |
+| Portfolio | https://harley-aguilar.github.io/Huderpg/ | https://harley-aguilar.github.io/Huderpg/pt/ |
+| Web sheets | https://harley-aguilar.github.io/Huderpg/projects/utopia.html | https://harley-aguilar.github.io/Huderpg/pt/projects/utopia.html |
 
-Based on the [editable Figma design](https://www.figma.com/design/CNhWtPQ25SxiYpAIVhKrRA).
+Both sheet and system galleries start **open** on each new page load. Visitors
+can independently collapse/reopen either section, including using the keyboard.
+The sheet gallery has three artworks; the system gallery has seven, with combat
+specializations last. Artwork links support a full-size viewer, zoom and keyboard
+navigation. The animated profile character appears before the Hude wordmark,
+inside a violet frame, with moving paper clipped to its silhouette. Clicking it
+pauses/resumes the animation; reduced-motion preferences start it paused.
 
-## Run locally
+## Edit and build
 
-```sh
-python3 -m http.server 8000
-```
+- `layout.py`: shared page templates and the two native `<details>` sections.
+- `editorial.py` / `content.py`: bilingual visible copy and interface labels.
+- `gallery.json`: image labels, dimensions and ordering.
+- `seo.py`: unique titles/descriptions, canonical URLs, reciprocal language
+  alternates, Open Graph/Twitter cards, JSON-LD and sitemap generation.
+- `assets/style.css`: dark-only design, nonbinary purple, Squartiqa display
+  type and self-hosted Chakra Petch Medium/Bold. The OFL license for Chakra
+  Petch is included; Squartiqa was supplied by the owner.
+- `assets/app.js`: privacy notice, dockable/focused contact dialog, image viewer,
+  embedded-demo resizing and character-animation controls.
 
-Open `http://localhost:8000`. No Node dependencies or compilation are required.
+Run `python3 build.py` after template, copy or SEO edits. This generates the four
+public pages, `404.html`, `sitemap.xml` and `robots.txt`, using only the Python
+standard library. Serve the repository using a static web server for local use.
+Managed workspace QA uses `sites-preview` and the ignored `dist/` mirror.
 
-## Edit
+The four committed 1200 × 630 JPEG sharing images match each language and page.
+To regenerate these optional artwork assets, run `python3 build_social.py` in an
+environment with fontTools and FFmpeg/librsvg. Normal HTML builds use the committed
+JPEGs and do not require those optional dependencies.
 
-Update bilingual copy in `content.py` and `editorial.py`, and page templates in `layout.py`, then run `python3 build.py`. The interactive sheet preview is rendered by `demo.py`. Styling is in `assets/style.css`; interactions are in `assets/app.js`.
+## SEO
 
-The portfolio demonstration uses sample data and does not persist personal information, contain analytics, or include the complete UTOPIA application. External profile links open in a separate tab. Manrope and IBM Plex Mono are self-hosted with their OFL licenses; no Google Fonts connections are made.
+Each public page has a self-canonical URL, `en` / `pt-BR` / `x-default` alternates,
+localized search and sharing descriptions, locale-specific sharing images and
+structured data describing the creator, website and page. Project pages also
+describe the web-sheet example and include breadcrumb data. There are no invented
+reviews, customers, results or commercial claims in the structured data.
 
-## GitHub Pages
+The sitemap contains only the four canonical public pages, with reciprocal
+language references. Both embedded implant pages and the error page carry
+`noindex,follow` and are excluded from the sitemap. The privacy notice is excluded
+from search snippets, while remaining available to visitors.
 
-Published from `main`, folder `/ (root)`, through GitHub Pages. A `.nojekyll` file is included.
+GitHub Pages hosts this repository below `/Huderpg/`. Crawlers read `robots.txt`
+from the **host root**, not a project subdirectory. The repository’s file is a
+portable deployment artifact; it does not override host-root rules. For explicit
+submission, use `https://harley-aguilar.github.io/Huderpg/sitemap.xml` in an already
+verified Search Console property, or reference it from the host owner’s root
+robots file. No Search Console submission or verification is implied by this
+release. Search engines determine discovery, indexing and result presentation.
 
-- English: https://harley-aguilar.github.io/Huderpg/
-- Português: https://harley-aguilar.github.io/Huderpg/pt/index.html
+## Demonstration, privacy and security
+
+`assets/utopia-implants/` embeds only the official UTOPIA implant module. Names,
+effects, installation slots and percentages can be edited; the total is recalculated.
+Records exist only in memory and reset on reload. This portfolio does not contain
+the full character application, cloud accounts, analytics or tracking cookies.
+
+Contact buttons offer email, Instagram, TikTok and the owner-provided Discord
+profile. The contact panel can stay at the side or become a focused modal.
+External links use `noopener noreferrer`, and pages declare `no-referrer`.
+
+The bilingual privacy notice stores only its dismissal flag in this tab’s
+`sessionStorage`. It explains GitHub Pages security IP logs and external-service
+policies and can be reopened from the footer. Demo input is escaped before being
+rendered as HTML. Parent pages restrict sources to the site through a meta CSP;
+their JSON-LD is allowed using the exact generated SHA-256 hash. The local iframe
+has a separate CSP permitting the inline styles required by the supplied module.
+Static meta policies do not claim header-only protections such as `frame-ancestors`.
 
 ## Validation
 
-`python3 check_site.py` checks language metadata, local links, canonical URLs and required interactive controls. `node --check assets/app.js` checks JavaScript syntax. Live browser checks passed for English/Portuguese navigation, case pages, editable name and attributes, resource sliders, inventory/implant tabs, keyboard tab navigation and dice rolls.
+```sh
+python3 build.py
+python3 check_site.py
+python3 check_seo.py
+node --check assets/app.js
+node --check assets/utopia-implants/implants.js
+node --check assets/utopia-implants/implants-en.js
+```
 
-## Editorial art direction
-
-The portfolio uses a permanent dark palette, nonbinary purple, bold Manrope headings, a gently glowing header rule, large project imagery and an original polyhedral mark. Project visuals are editable HTML/SVG interface studies, clearly labeled as sample data. The body silhouette is retained from the owner’s UTOPIA source.
-
-References studied (inspiration, no third-party artwork reused):
-
-- [Locomotive](https://locomotive.ca/en): clear project-led portfolio structure.
-- [Aparelho Studio](https://aparelho.studio/): editorial sequencing, typographic contrast and restrained accent color.
-- [Mothership Companion](https://www.tuesdayknightgames.com/pages/mothership-companion-app): practical character-tool presentation.
-- [WCAG contrast guidance](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html): readable foreground/background combinations and focus states.
-
-No invented commercial results, client testimonials or additional project credits were introduced. The visual language of UTOPIA remains distinct from the portfolio’s editorial identity. Motion respects reduced-motion preferences; content and service disclosures remain available without JavaScript.
-
-## Privacy and security
-
-All five HTML pages declare a restrictive Content Security Policy through a meta element: local scripts, styles, images and fonts only; no outbound fetches, forms, frames, plugins or base URL changes. JSON-LD is allowed by its generated SHA-256 hash. Inline executable scripts and inline styles are not allowed. External links use noopener/noreferrer; a no-referrer policy applies to the pages. GitHub Pages serves the site over HTTPS. Header-only protections such as frame-ancestors are not claimed by this static meta policy.
-
-A bilingual privacy notice appears on first entry in each tab session. Only its dismissal preference is stored in sessionStorage; no visitor ID is generated. If storage is unavailable, the notice remains dismissible on the current page. It can be reopened from the footer. It explains the absence of site tracking, session storage, the temporary demo values, external profiles and GitHub Pages IP security logs. Acknowledgement is not presented as tracking consent.
-
-## Current typography and header interaction
-
-Squartiqa (owner supplied) is used for display headings. Self-hosted Chakra Petch Medium/Bold is the reading face, with its OFL license alongside the fonts. The header d20 is a static decorative mark. Portfolio spacing uses consistent section, text and control gaps across desktop and compact layouts.
+`check_site.py` checks all seven HTML files, local assets/links, anchors, heading
+counts, language metadata and the implant-only demonstration. `check_seo.py`
+checks distinct metadata, reciprocal language pairs, actual JPEG dimensions,
+JSON-LD/CSP compatibility, canonical sitemap contents, noindex exclusions and
+the default-open state of both galleries. Browser QA covers the gallery toggles,
+image viewer, contacts, privacy controls, language navigation, implant editing,
+percentage totals, removal and escaping, plus narrow-screen layout.
