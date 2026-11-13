@@ -174,3 +174,12 @@
 .hero{position:relative}.hero-top{position:absolute;right:0;top:44px;margin:0}.official-implants{display:block;width:100%;height:1580px;border:0;border-radius:8px;background:#17121e}@media(min-width:1440px){.hero-top{top:52px}}@media(max-width:760px){.hero-top{position:static;margin-bottom:16px}.official-implants{height:2300px}}
 
 @media(max-width:760px){.case-overview{padding-block:24px}.interactive-section{padding-top:24px}}
+
+/* Original profile character: the moving paper is clipped to its drawn silhouette. */
+.hero-details{display:grid;grid-template-columns:minmax(0,1fr) 192px;gap:48px;align-items:center}
+.hero-character{position:relative;margin:0;width:192px;justify-self:end}
+.character-cutout{mask:url('character/mask.svg') center/100% 100% no-repeat;-webkit-mask:url('character/mask.svg') center/100% 100% no-repeat}
+.character-cutout video{display:block;width:100%;height:auto}
+.character-motion{position:absolute;right:-8px;bottom:0;display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--rule);border-radius:50%;background:var(--bg,#141116);color:var(--violet);font:700 15px var(--sans);cursor:pointer}
+.character-motion[hidden]{display:none}.character-motion:hover{border-color:var(--violet);color:var(--ink)}
+@media(max-width:760px){.hero-details{display:block;position:relative}.hero-character{position:absolute;right:0;bottom:0;width:80px}.hero-intro .text-link{width:calc(100% - 128px);min-width:0}.character-motion{right:-8px;bottom:-8px;width:30px;height:30px}.hero-intro{gap:28px}}

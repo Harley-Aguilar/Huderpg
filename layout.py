@@ -11,7 +11,7 @@ from demo import sheet
 ROOT=Path(__file__).parent
 BASE='https://harley-aguilar.github.io/Huderpg/'
 IG='https://www.instagram.com/_huderpg_/'
-VERSION='discord-contact-1'
+VERSION='character-identity-1'
 
 def arrow(direction='up'):
     path='M5 19 19 5M5 5h14v14' if direction=='up' else 'M5 12h14m-6-6 6 6-6 6'
@@ -54,7 +54,7 @@ def head(key,prefix='',case=False):
     schema={'@context':'https://schema.org','@type':'Person','name':'Harley Aguilar','alternateName':'Hude','url':BASE+('pt/' if key=='pt' else ''),'sameAs':['https://www.youtube.com/@Hudezin',IG,'https://www.tiktok.com/@hudeplay']}
     schema_json=json.dumps(schema,ensure_ascii=False)
     schema_hash=base64.b64encode(hashlib.sha256(schema_json.encode()).digest()).decode()
-    policy="default-src 'none'; script-src 'self' 'sha256-"+schema_hash+"'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'"
+    policy="default-src 'none'; script-src 'self' 'sha256-"+schema_hash+"'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'; media-src 'self'"
     return f'''<!doctype html><html lang="{d['lang']}"><head>
 <meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="{policy}"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#141116"><meta name="color-scheme" content="dark"><title>{e(title)}</title><meta name="description" content="{e(d['description'])}">
 <link rel="canonical" href="{BASE+route}"><link rel="alternate" hreflang="en" href="{alt}"><link rel="alternate" hreflang="pt-BR" href="{altpt}"><link rel="alternate" hreflang="x-default" href="{alt}">
@@ -115,7 +115,7 @@ def home(key):
     rows=''.join(f'<details class="service-row"'+(' open' if i in (1,2) else '')+f'><summary><span class="service-name"><span class="service-title">{title}</span><small class="mono">{tag}</small></span><span class="service-plus" aria-hidden="true"></span></summary><div class="service-body"><div class="service-intro"><p>{desc}</p><a class="text-link" href="mailto:huderpg@gmail.com" data-open-contact aria-haspopup="dialog" aria-controls="contact-dialog"><span>{c["start"]}</span>{arrow()}</a></div>{image_gallery(key,"sheets" if i==1 else "systems",pre) if i in (1,2) else ""}</div></details>' for i,(title,tag,desc) in enumerate(c['serviceRows'],1))
     socials=''.join(f'<a href="{url}" target="_blank" rel="noopener noreferrer"><span class="profile-label">{social_icon(name)}<span>{name}<small>{handle}</small></span></span>{arrow()}</a>' for name,handle,url in [('YouTube','@Hudezin','https://www.youtube.com/@Hudezin'),('Instagram','@_huderpg_',IG),('TikTok','@hudeplay','https://www.tiktok.com/@hudeplay')])
     return head(key,pre)+header(key)+f'''<main id="main">
-<section class="hero wrap"><div class="hero-top mono"><span class="availability"><i></i>{c['availability']}</span></div><div class="hero-grid"><h1>{c['hero']}</h1><div class="hero-intro"><p>{c['intro']}</p><a class="text-link" href="#work"><span>{c['work']}</span>{arrow('right')}</a></div></div></section>
+<section class="hero wrap"><div class="hero-top mono"><span class="availability"><i></i>{c['availability']}</span></div><div class="hero-grid"><h1>{c['hero']}</h1><div class="hero-details"><div class="hero-intro"><p>{c['intro']}</p><a class="text-link" href="#work"><span>{c['work']}</span>{arrow('right')}</a></div><figure class="hero-character"><div class="character-cutout"><video data-character-video muted playsinline loop preload="metadata" poster="{pre}assets/character/poster.jpg" width="320" height="310" aria-label="{'Personagem do Hude com textura de papel animada' if key=='pt' else 'Hude’s character with animated paper texture'}"><source src="{pre}assets/character/paper.mp4" type="video/mp4"></video></div><button class="character-motion" data-character-toggle hidden aria-label="{'Pausar animação' if key=='pt' else 'Pause animation'}" data-play-label="{'Reproduzir animação' if key=='pt' else 'Play animation'}" data-pause-label="{'Pausar animação' if key=='pt' else 'Pause animation'}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6v12m6-12v12"/></svg></button></figure></div></div></section>
 <section class="selected-work wrap" id="work" aria-label="{d['nav'][0]}"><a class="project-stage" href="projects/utopia.html" aria-label="{c['stage']}">{project_art(key,pre)}</a><article class="project-caption"><h2>{c['caseTitle']}</h2><p class="project-description">{c['caseDescription']}</p><div class="project-meta"><div class="project-tags mono">{tags}</div><a class="text-link" href="projects/utopia.html"><span>{c['viewCase']}</span>{arrow()}</a></div><span class="project-disclosure mono">{c['designStudy']}</span></article></section>
 <section class="services wrap" id="services"><div class="service-list">{rows}</div></section>
 <section class="profiles wrap" id="profiles"><nav class="profile-links" aria-label="{'Perfis sociais' if key=='pt' else 'Social profiles'}">{socials}</nav></section>

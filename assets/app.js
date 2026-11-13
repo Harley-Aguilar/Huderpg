@@ -53,3 +53,17 @@ document.querySelectorAll('.official-implants').forEach(frame=>{
   new ResizeObserver(fit).observe(content);fit();
  });
 });
+
+const characterVideo=document.querySelector('[data-character-video]');
+if(characterVideo){
+ const toggle=document.querySelector('[data-character-toggle]');
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ toggle.hidden=false;
+ function syncCharacter(){const paused=characterVideo.paused;toggle.setAttribute('aria-label',paused?toggle.dataset.playLabel:toggle.dataset.pauseLabel);toggle.querySelector('path').setAttribute('d',paused?'M8 5l11 7-11 7Z':'M9 6v12m6-12v12');}
+ characterVideo.addEventListener('play',syncCharacter);
+ characterVideo.addEventListener('pause',syncCharacter);
+ toggle.addEventListener('click',()=>{if(characterVideo.paused)characterVideo.play().catch(syncCharacter);else characterVideo.pause();});
+ reduced.addEventListener('change',()=>{if(reduced.matches)characterVideo.pause();});
+ if(!reduced.matches)characterVideo.play().catch(syncCharacter);
+ syncCharacter();
+}
