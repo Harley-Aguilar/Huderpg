@@ -175,11 +175,11 @@
 
 @media(max-width:760px){.case-overview{padding-block:24px}.interactive-section{padding-top:24px}}
 
-/* Original profile character: the moving paper is clipped to its drawn silhouette. */
-.hero-details{display:grid;grid-template-columns:minmax(0,1fr) 192px;gap:48px;align-items:center}
-.hero-character{position:relative;margin:0;width:192px;justify-self:end}
-.character-cutout{mask:url('character/mask.svg') center/100% 100% no-repeat;-webkit-mask:url('character/mask.svg') center/100% 100% no-repeat}
+/* Animated profile character, before the wordmark on every page. */
+.brand-lockup{gap:12px}
+.brand-character{position:relative;flex:none;width:56px;height:56px;display:grid;place-items:center;padding:0;border:0;background:transparent;cursor:pointer;color:var(--violet)}
+.character-cutout{display:block;width:100%;mask:url('character/mask.svg') center/100% 100% no-repeat;-webkit-mask:url('character/mask.svg') center/100% 100% no-repeat}
 .character-cutout video{display:block;width:100%;height:auto}
-.character-motion{position:absolute;right:-8px;bottom:0;display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--rule);border-radius:50%;background:var(--bg,#141116);color:var(--violet);font:700 15px var(--sans);cursor:pointer}
-.character-motion[hidden]{display:none}.character-motion:hover{border-color:var(--violet);color:var(--ink)}
-@media(max-width:760px){.hero-details{display:block;position:relative}.hero-character{position:absolute;right:0;bottom:0;width:80px}.hero-intro .text-link{width:calc(100% - 128px);min-width:0}.character-motion{right:-8px;bottom:-8px;width:30px;height:30px}.hero-intro{gap:28px}}
+.character-status{position:absolute;right:-3px;bottom:-3px;width:16px;height:16px;background:var(--bg,#141116);border-radius:50%;opacity:0}
+.brand-character:hover .character-status,.brand-character:focus-visible .character-status{opacity:1}
+@media(max-width:760px){.brand-character{width:44px;height:44px}}
