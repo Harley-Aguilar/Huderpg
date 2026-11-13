@@ -188,3 +188,9 @@
 .nav{min-height:92px;padding-block:16px;gap:20px}.brand-lockup{gap:8px}
 @media(max-width:760px){.nav{min-height:88px;padding-block:16px;gap:16px}.brand-lockup{gap:8px}}
 @media(max-width:580px){.nav{gap:12px}.nav>.nav-contact{min-height:52px}}
+
+/* Match the animated identity mark to the portfolio's framed cards. */
+.brand-character{border:1px solid #44334e;border-radius:var(--radius);background:#211929;padding:5px;transition:border-color .2s,background .2s}
+.brand-character:hover{border-color:var(--violet);background:#2c1d38}
+.gallery-sheets .gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:760px){.gallery-sheets .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.brand-character{padding:3px}}
